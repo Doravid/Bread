@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 8387177715952751190}
   - component: {fileID: 115387673220578584}
   - component: {fileID: 3043524487651643720}
+  - component: {fileID: 8520846444634486314}
   m_Layer: 0
   m_Name: CoalEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 4251612018338193666}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &236242985565273198
 MeshFilter:
@@ -136,6 +137,28 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInAttackRange: 0
   timeSincePatroll: 0
+  health: 10
+--- !u!65 &8520846444634486314
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3910419712773913181}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.3638015, y: 1.4197364, z: 2.3638015}
+  m_Center: {x: 0, y: 0.29013196, z: 0}
 --- !u!1 &8795791589009255399
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +188,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7751939364636916062}
-  - {fileID: 1424466978543202722}
+  - {fileID: 1426479730770885667}
   m_Father: {fileID: 1486258738477061863}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -250,7 +273,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eca000ab44c908d4dab395f654753038, type: 3}
---- !u!4 &1424466978543202722 stripped
+--- !u!4 &1426479730770885667 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4335282639064450, guid: eca000ab44c908d4dab395f654753038, type: 3}
   m_PrefabInstance: {fileID: 1424466978543202721}

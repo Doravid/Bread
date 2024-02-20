@@ -25,6 +25,9 @@ public class BasicEnemyAI : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
     public float timeSincePatroll;
 
+    //Enemy Stats
+    public int health;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -32,6 +35,10 @@ public class BasicEnemyAI : MonoBehaviour
     }
     private void Update()
     {
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
