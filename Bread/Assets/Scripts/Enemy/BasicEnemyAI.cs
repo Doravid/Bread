@@ -27,18 +27,28 @@ public class BasicEnemyAI : MonoBehaviour
 
     //Enemy Stats
     public int health;
+    public string enemyName;
+    public QuestManager manager;
 
     private void Awake()
     {
+        if (name == null)
+        {
+            name = "Enemy";
+        }
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player").transform ;
+        manager = GameObject.Find("QuestUIController").GetComponent<QuestManager>();
     }
     private void Update()
     {
+        //Kills self on 0 HP
         if (health <= 0)
         {
+            manager.incrementQuests(gameObject);
             Destroy(gameObject);
         }
+
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
@@ -77,6 +87,7 @@ public class BasicEnemyAI : MonoBehaviour
     }
     private void AttackPlayer()
     {
+        if (agent == null) return;
         agent.SetDestination(transform.position);
         transform.LookAt(player);
 

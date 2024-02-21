@@ -138,6 +138,8 @@ MonoBehaviour:
   playerInAttackRange: 0
   timeSincePatroll: 0
   health: 10
+  name: Coal
+  manager: {fileID: 0}
 --- !u!65 &8520846444634486314
 BoxCollider:
   m_ObjectHideFlags: 0

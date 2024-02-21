@@ -9,6 +9,8 @@ public class QuestManager : MonoBehaviour
     private GameObject player;
     [SerializeField]
     private GameObject descriptionHolder;
+    [SerializeField]
+    private PlayerQuests playerQuests;
 
     private void Start()
     {
@@ -23,22 +25,25 @@ public class QuestManager : MonoBehaviour
             toggleMenu();
         }
     }
-    public  List<Quest> activeQuests = new List<Quest>();
     public void startQuest(Quest newQuest)
     {
-        activeQuests.Add(newQuest);
+        Debug.Log(newQuest.quantity);
+        playerQuests._quests_.Add(newQuest);
         newQuest.isActive = true;
     }
     public void incrementQuests(GameObject obj)
     {
-        foreach (Quest quest in activeQuests)
+        foreach (Quest quest in playerQuests._quests_)
         {
-            if (quest.collection.Equals(obj) && !quest.isComplete)
+            Debug.Log("COLLECTION: " + quest.collection);
+            Debug.Log("OBJ: " + obj);
+
+            if (obj.GetComponent<BasicEnemyAI>().enemyName == quest.collection.GetComponent<BasicEnemyAI>().enemyName && !quest.isComplete)
             {
-                quest.quantity = quest.quantity - 1; 
-                if(quest.quantity <= 0)
+                quest.quantityCollected++; 
+                if(quest.quantity - quest.quantityCollected <= 0)
                 {
-                    activeQuests.Remove(quest);
+                    playerQuests._quests_.Remove(quest);
                     quest.isComplete = true;
                     quest.isActive = false;
                 }

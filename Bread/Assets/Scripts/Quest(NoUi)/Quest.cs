@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Quest : ScriptableObject
 {
-    public int quantity;
+    public int quantity, quantityCollected;
     public GameObject collection;
     public bool isComplete;
     public bool isActive;

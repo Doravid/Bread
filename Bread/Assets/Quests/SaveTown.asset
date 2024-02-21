@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def439a045fef754bbb4a000d2e26127, type: 3}
   m_Name: SaveTown
   m_EditorClassIdentifier: 
-  quantity: 0
+  quantity: 10
+  quantityCollected: 11
   collection: {fileID: 3910419712773913181, guid: 36d2594400319cd4a81a6d17a4336872, type: 3}
   isComplete: 0
   isActive: 1

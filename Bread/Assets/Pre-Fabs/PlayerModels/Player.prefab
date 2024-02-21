@@ -376,13 +376,13 @@ MonoBehaviour:
   inputResponseFiltering: 0.1
   enableMovementControl: 1
   walkingSpeed: 300
-  sprintingSpeed: 400
+  sprintingSpeed: 520
   crouchingSpeed: 1
   decelerationSpeed: 240
   sprintKey: 51
   crouchKey: 55
   slideKey: 36
-  canSprint: 0
+  canSprint: 1
   isSprinting: 0
   toggleSprint: 0
   sprintOverride: 0
@@ -618,6 +618,7 @@ MonoBehaviour:
   bread: 0
   maxHealth: 0
   maxMana: 0
+  questZ: {fileID: 0}
 --- !u!114 &5385186901346093310
 MonoBehaviour:
   m_ObjectHideFlags: 0

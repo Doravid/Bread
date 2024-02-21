@@ -9747,6 +9747,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d44f75c7bde584c9663c7c7d4da730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayerProjectile: 0
+  damage: 5
 --- !u!1 &3405074063714662546
 GameObject:
   m_ObjectHideFlags: 0

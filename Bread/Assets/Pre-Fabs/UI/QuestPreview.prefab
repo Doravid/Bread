@@ -621,7 +621,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Accept: {fileID: 1517339565126007915}
   TurnIn: {fileID: 5789807237900686503}
+  toDestroy: {fileID: 0}
   quest: {fileID: 11400000, guid: e651e0ef7e9767e48b67cd208c885ac6, type: 2}
+  playerQuests: {fileID: 11400000, guid: 08febaf67c2d7314ba8baa102f7c52cd, type: 2}
 --- !u!1 &5789807237900686503
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,13 +746,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
-        m_MethodName: startQuest
-        m_Mode: 2
+      - m_Target: {fileID: 7533220392478339205}
+        m_TargetAssemblyTypeName: TurnInManager, Assembly-CSharp
+        m_MethodName: tryQuestTurnIn
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: e651e0ef7e9767e48b67cd208c885ac6, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Quest, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

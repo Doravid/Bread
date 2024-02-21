@@ -23,18 +23,11 @@ public class CharacterStats : MonoBehaviour
     {
         Save.load(this);
     }
-
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)){
             Save.saveStats(this);
-            addCompletedQuest(89);
-            Debug.Log(questZ.Quests.Contains(89));
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            //GetComponent<QuestManager>().startQuest(this.gameObject, 10);
         }
     }
     //GETTERS
@@ -45,7 +38,7 @@ public class CharacterStats : MonoBehaviour
     public int getBread(){return bread;}
     public int getMaxHealth(){return maxHealth;}
     public int getMaxMana(){return maxMana;
-    }public List<int> getCompletedQuests() { return questZ.Quests; }
+    }public List<int> getCompletedQuests() { return questZ._quests; }
     //SETTERS
     public void setCurrentHealth(int currentHealth)
     {
@@ -77,7 +70,7 @@ public class CharacterStats : MonoBehaviour
     }
     public void setCompletedQuests(List<int> completedQuests)
     {
-        this.questZ.Quests = completedQuests;
+        this.questZ._quests = completedQuests;
     }
     //Custom Functions
     public void dealDamage(int damage)
@@ -86,6 +79,6 @@ public class CharacterStats : MonoBehaviour
     }
     public void addCompletedQuest(int questId)
     {
-        this.questZ.Quests.Add(questId);
+        this.questZ._quests.Add(questId);
     }
 }

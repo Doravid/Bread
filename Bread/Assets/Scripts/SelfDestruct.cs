@@ -23,7 +23,6 @@ public class SelfDestruct : MonoBehaviour
     {
         if(isPlayerProjectile)
         {
-            Debug.Log(other);
             if(other.tag == "Enemy")
             {
                 other.GetComponent<BasicEnemyAI>().health -= damage;
