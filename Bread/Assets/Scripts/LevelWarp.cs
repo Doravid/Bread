@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelWarp : MonoBehaviour
 {
     public string sceneName;
-    [SerializeField]
-    Scene scene;
+    public string sceneStartLocation;
     private void Start()
     {
         if(sceneName == null)
@@ -20,8 +19,10 @@ public class LevelWarp : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            other.GetComponent<CharacterStats>().warpPoint = sceneStartLocation;
+            Save.saveStats(other.GetComponent<CharacterStats>());
             SceneManager.LoadScene(sceneName);
-
+            
         }
     }
     

@@ -29,6 +29,7 @@ public class TurnInManager : MonoBehaviour
         if (quest.isActive && (quest.quantity - quest.quantityCollected) <= 0)
         {
             quest.isActive = false;
+            quest.isComplete = true;
             playerQuests._quests.Add(quest.id);
             playerQuests._quests_.Remove(quest);
             Destroy(gameObject);

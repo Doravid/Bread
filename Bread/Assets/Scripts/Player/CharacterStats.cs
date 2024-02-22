@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class CharacterStats : MonoBehaviour
 {
+    
+
+    public string warpPoint;
     //Regenerative Stats (Non-permanant)
     [SerializeField, Header("Status")]
     private int currentHealth, currentMana;
@@ -15,13 +20,22 @@ public class CharacterStats : MonoBehaviour
     // Each quest has a unique ID, this array stores all the quest IDs that the player has beaten
     [SerializeField]
     public PlayerQuests questZ;
+    [SerializeField]
+    private float healthTimer, manaTimer, healthTimerLength, manaTimerLength;
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         Save.load(this);
+
+    }
+
+    void Start()
+    {
+        if (warpPoint != null && warpPoint != "")
+        {
+            transform.position = GameObject.Find(warpPoint).transform.position;
+        }
+
     }
     // Update is called once per frame
     void Update()
@@ -29,6 +43,25 @@ public class CharacterStats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)){
             Save.saveStats(this);
         }
+        if(healthTimer <= 0 && currentHealth < maxHealth)
+        {
+            currentHealth++;
+            healthTimer += healthTimerLength;
+        }
+        if (manaTimer <= 0 && currentMana < maxMana)
+        {
+            currentMana++;
+            manaTimer += manaTimerLength;
+        }
+        if(healthTimer > 0)
+        {
+            healthTimer -= Time.deltaTime;
+        }
+        if(manaTimer > 0)
+        {
+            manaTimer -= Time.deltaTime;
+        }
+        
     }
     //GETTERS
     public int getCurrentHealth(){return currentHealth;}
@@ -81,4 +114,5 @@ public class CharacterStats : MonoBehaviour
     {
         this.questZ._quests.Add(questId);
     }
+    
 }

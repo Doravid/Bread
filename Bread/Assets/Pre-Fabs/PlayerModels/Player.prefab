@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 315621187839132833}
   - component: {fileID: 3589490301766704962}
   - component: {fileID: 5385186901346093310}
+  - component: {fileID: 402794479482396925}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -397,7 +398,7 @@ MonoBehaviour:
   currentGroundMovementSpeed: 1
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 51
+    m_Bits: 115
   hardSlopeLimit: 55
   slopeInfluenceOnSpeed: 1
   maxStairRise: 0.4
@@ -611,6 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d6c8a46088162498a164e1d5573981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warpPoint: 
   currentHealth: 0
   currentMana: 0
   strength: 0
@@ -618,7 +620,11 @@ MonoBehaviour:
   bread: 0
   maxHealth: 0
   maxMana: 0
-  questZ: {fileID: 0}
+  questZ: {fileID: 11400000, guid: 08febaf67c2d7314ba8baa102f7c52cd, type: 2}
+  healthTimer: 0
+  manaTimer: 0
+  healthTimerLength: 1
+  manaTimerLength: 1
 --- !u!114 &5385186901346093310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +639,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 7654872380759102428}
   ManaBar: {fileID: 3616902061223131221}
+--- !u!114 &402794479482396925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963189929315586787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a886e29b05b7a2944958727b3c20c457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 1645536045341741610, guid: 71151961daae20240adfa034b1af4a5e, type: 3}
+  timeBetweenAttacks: 1
 --- !u!1 &2488864733238964663
 GameObject:
   m_ObjectHideFlags: 0

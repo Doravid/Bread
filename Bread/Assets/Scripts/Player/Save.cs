@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Save : MonoBehaviour
 {
     [SerializeField]
     private Transform player;
+    private void Start()
+    {
+        
+    }
     void Update()
     {
         PlayerPrefs.SetFloat("PPX", player.position.x);
@@ -22,6 +27,7 @@ public class Save : MonoBehaviour
         PlayerPrefs.SetInt("CURRENTMANA", stats.getCurrentMana());
         PlayerPrefs.SetInt("MAXHEALTH", stats.getMaxHealth());
         PlayerPrefs.SetInt("MAXMANA", stats.getMaxMana());
+        PlayerPrefs.SetString("WARPTO", stats.warpPoint);
     }
     public static void load(CharacterStats stats)
     {
@@ -33,5 +39,6 @@ public class Save : MonoBehaviour
         stats.setCurrentMana(PlayerPrefs.GetInt("CURRENTMANA", stats.getCurrentMana()));
         stats.setMaxHealth(PlayerPrefs.GetInt("MAXHEALTH", stats.getMaxHealth()));
         stats.setMaxMana(PlayerPrefs.GetInt("MAXMANA", stats.getMaxMana()));
+        stats.warpPoint = PlayerPrefs.GetString("WARPTO", "");
     }
 }

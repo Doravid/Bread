@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SaveTown
   m_EditorClassIdentifier: 
   quantity: 10
-  quantityCollected: 11
+  quantityCollected: 5
   collection: {fileID: 3910419712773913181, guid: 36d2594400319cd4a81a6d17a4336872, type: 3}
-  isComplete: 0
-  isActive: 1
+  isComplete: 1
+  isActive: 0
   id: 89
