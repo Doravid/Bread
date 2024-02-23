@@ -21,8 +21,9 @@ public class Save : MonoBehaviour
     {
         if (stats == null) { return; }
         PlayerPrefs.SetInt("STRENGTH", stats.getStrength());
-        PlayerPrefs.SetInt("LUCK", stats.getLuck());
-        PlayerPrefs.SetInt("BREAD", stats.getBread());
+        PlayerPrefs.SetInt("XP", stats.getXp());
+        PlayerPrefs.SetInt("XPTONEXTLEVEL", stats.getXpToNextLevel());
+        PlayerPrefs.SetInt("LEVEL", stats.getLevel());
         PlayerPrefs.SetInt("CURRENTHEALTH", stats.getCurrentHealth());
         PlayerPrefs.SetInt("CURRENTMANA", stats.getCurrentMana());
         PlayerPrefs.SetInt("MAXHEALTH", stats.getMaxHealth());
@@ -33,8 +34,9 @@ public class Save : MonoBehaviour
     {
         if (stats == null) { return; }
         stats.setStrength(PlayerPrefs.GetInt("STRENGTH", stats.getStrength()));
-        stats.setLuck(PlayerPrefs.GetInt("LUCK", stats.getLuck()));
-        stats.setBread(PlayerPrefs.GetInt("BREAD", stats.getBread()));
+        stats.setXp(PlayerPrefs.GetInt("XP"));
+        stats.setXpToNextLevel(PlayerPrefs.GetInt("XPTONEXTLEVEL"));
+        stats.setLevel(PlayerPrefs.GetInt("LEVEL", stats.getLevel()));
         stats.setCurrentHealth(PlayerPrefs.GetInt("CURRENTHEALTH", stats.getCurrentHealth()));
         stats.setCurrentMana(PlayerPrefs.GetInt("CURRENTMANA", stats.getCurrentMana()));
         stats.setMaxHealth(PlayerPrefs.GetInt("MAXHEALTH", stats.getMaxHealth()));

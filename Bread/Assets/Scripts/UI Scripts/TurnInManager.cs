@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class TurnInManager : MonoBehaviour
     private Quest quest;
     [SerializeField]
     private PlayerQuests playerQuests;
+    [SerializeField]
+    private GameObject prog;
 
     
     void Start()
@@ -22,7 +25,13 @@ public class TurnInManager : MonoBehaviour
                 Accept.SetActive(false);
                 TurnIn.SetActive(true);
             }
-
+            TMPro.TextMeshProUGUI progress = prog.GetComponent<TMPro.TextMeshProUGUI>();  
+        if (progress != null)
+        {
+            Debug.Log(progress.text);
+            progress.text = quest.quantityCollected + "/" + quest.quantity;
+            Debug.Log(progress.text);
+        }
     }
     public void tryQuestTurnIn()
     {

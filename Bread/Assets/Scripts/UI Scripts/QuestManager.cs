@@ -1,5 +1,6 @@
 using SUPERCharacter;
 using System.Collections.Generic;
+using System.Xml.XPath;
 using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
@@ -19,24 +20,23 @@ public class QuestManager : MonoBehaviour
         panelUI.SetActive(false);
         inUI = false;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K)){
-            toggleMenu();
-        }
-    }
     public void startQuest(Quest newQuest)
     {
         Debug.Log(newQuest.quantity);
         playerQuests._quests_.Add(newQuest);
         newQuest.isActive = true;
     }
-    public void incrementQuests(GameObject obj)
+    public void enemyKilled(GameObject obj)
     {
+        incrementQuests(obj);
+        BasicEnemyAI enemy = obj.GetComponent<BasicEnemyAI>();
+        player.GetComponent<CharacterStats>().setXp(player.GetComponent<CharacterStats>().getXp() + enemy.xpValue);
+    }
+    private void incrementQuests(GameObject obj)
+    {
+
         foreach (Quest quest in playerQuests._quests_)
         {
-            Debug.Log("COLLECTION: " + quest.collection);
-            Debug.Log("OBJ: " + obj);
 
             if (obj.GetComponent<BasicEnemyAI>().enemyName == quest.collection.GetComponent<BasicEnemyAI>().enemyName && !quest.isComplete)
             {
@@ -50,6 +50,7 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
+    
     //UI Managment (I may want to move these later as they server a different function to the rest of the class)
     public void toggleMenu()
     {
@@ -57,12 +58,14 @@ public class QuestManager : MonoBehaviour
         {
             inUI = true;
             player.GetComponent<SUPERCharacterAIO>().PausePlayer(PauseModes.FreezeInPlace);
+            player.GetComponent<PlayerAttack>().enabled = false;
             panelUI.SetActive(true);
         }
         else
         {
             player.GetComponent<SUPERCharacterAIO>().UnpausePlayer();
             panelUI.SetActive(false);
+            player.GetComponent<PlayerAttack>().enabled = true;
             inUI = false;
         }
     }

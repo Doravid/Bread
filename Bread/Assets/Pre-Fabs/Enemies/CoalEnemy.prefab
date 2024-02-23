@@ -138,7 +138,8 @@ MonoBehaviour:
   playerInAttackRange: 0
   timeSincePatroll: 0
   health: 10
-  name: Coal
+  enemyName: Coal
+  xpValue: 5
   manager: {fileID: 0}
 --- !u!65 &8520846444634486314
 BoxCollider:

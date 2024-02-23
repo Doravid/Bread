@@ -11,11 +11,11 @@ public class CharacterStats : MonoBehaviour
     public string warpPoint;
     //Regenerative Stats (Non-permanant)
     [SerializeField, Header("Status")]
-    private int currentHealth, currentMana;
+    private int currentHealth, currentMana, xp;
    
     //Stats that affect attacks, skills, etc...
-    [SerializeField, Header("Player Stat")]
-    private int strength, luck, bread, maxHealth, maxMana;
+    [SerializeField, Header("Permanant Stats")]
+    private int strength, level, maxHealth, maxMana, xpToNextLevel;
 
     // Each quest has a unique ID, this array stores all the quest IDs that the player has beaten
     [SerializeField]
@@ -26,7 +26,6 @@ public class CharacterStats : MonoBehaviour
     private void Awake()
     {
         Save.load(this);
-
     }
 
     void Start()
@@ -34,6 +33,7 @@ public class CharacterStats : MonoBehaviour
         if (warpPoint != null && warpPoint != "")
         {
             transform.position = GameObject.Find(warpPoint).transform.position;
+            warpPoint = "";
         }
 
     }
@@ -61,17 +61,24 @@ public class CharacterStats : MonoBehaviour
         {
             manaTimer -= Time.deltaTime;
         }
+        if(xp >= xpToNextLevel)
+        {
+            xp = 0;
+            level++;
+            xpToNextLevel = (int)((float) xpToNextLevel * 1.2);
+        }
         
     }
     //GETTERS
     public int getCurrentHealth(){return currentHealth;}
     public int getCurrentMana(){return currentMana;}
     public int getStrength(){return strength;}
-    public int getLuck(){return luck;}
-    public int getBread(){return bread;}
+    public int getXp(){return xp;}
+    public int getLevel(){return level;}
     public int getMaxHealth(){return maxHealth;}
-    public int getMaxMana(){return maxMana;
-    }public List<int> getCompletedQuests() { return questZ._quests; }
+    public int getMaxMana() { return maxMana; }
+    public int getXpToNextLevel(){return xpToNextLevel;}
+    public List<int> getCompletedQuests() { return questZ._quests; }
     //SETTERS
     public void setCurrentHealth(int currentHealth)
     {
@@ -85,13 +92,17 @@ public class CharacterStats : MonoBehaviour
     {
         this.strength = strength;
     }
-    public void setLuck(int luck)
+    public void setXp(int xp)
     {
-        this.luck = luck;
+        this.xp = xp;
     }
-    public void setBread(int bread)
+    public void setXpToNextLevel(int xpToNext)
     {
-        this.bread = bread;
+        this.xpToNextLevel = xpToNext;
+    }
+    public void setLevel(int level)
+    {
+        this.level = level;
     }
     public void setMaxHealth(int maxHealth)
     {

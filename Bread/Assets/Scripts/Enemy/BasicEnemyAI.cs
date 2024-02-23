@@ -28,6 +28,7 @@ public class BasicEnemyAI : MonoBehaviour
     //Enemy Stats
     public int health;
     public string enemyName;
+    public int xpValue;
     public QuestManager manager;
 
     private void Awake()
@@ -45,7 +46,7 @@ public class BasicEnemyAI : MonoBehaviour
         //Kills self on 0 HP
         if (health <= 0)
         {
-            manager.incrementQuests(gameObject);
+            manager.enemyKilled(gameObject);
             Destroy(gameObject);
         }
 

@@ -13,9 +13,7 @@ public class QuestInit : MonoBehaviour
     private Quest questA;
     private void Start()
     {
-        Debug.Log(questA.id);
-        Debug.Log(quest._quests.Count);
-        if (quest._quests.Contains(89))
+        if (quest._quests.Contains(questA.id))
             Destroy(this.GameObject());
     }
 }
