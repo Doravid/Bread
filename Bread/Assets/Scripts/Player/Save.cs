@@ -28,6 +28,8 @@ public class Save : MonoBehaviour
         PlayerPrefs.SetInt("CURRENTMANA", stats.getCurrentMana());
         PlayerPrefs.SetInt("MAXHEALTH", stats.getMaxHealth());
         PlayerPrefs.SetInt("MAXMANA", stats.getMaxMana());
+        PlayerPrefs.SetInt("HEALTHREGEN", stats.getHealthRegen());
+        PlayerPrefs.SetInt("MANAREGEN", stats.getManaRegen());
         PlayerPrefs.SetString("WARPTO", stats.warpPoint);
     }
     public static void load(CharacterStats stats)
@@ -41,6 +43,8 @@ public class Save : MonoBehaviour
         stats.setCurrentMana(PlayerPrefs.GetInt("CURRENTMANA", stats.getCurrentMana()));
         stats.setMaxHealth(PlayerPrefs.GetInt("MAXHEALTH", stats.getMaxHealth()));
         stats.setMaxMana(PlayerPrefs.GetInt("MAXMANA", stats.getMaxMana()));
+        stats.setHealthRegen(PlayerPrefs.GetInt("HEALTHREGEN", stats.getHealthRegen()));
+        stats.setManaRegen(PlayerPrefs.GetInt("MANAREGEN", stats.getManaRegen()));
         stats.warpPoint = PlayerPrefs.GetString("WARPTO", "");
     }
 }

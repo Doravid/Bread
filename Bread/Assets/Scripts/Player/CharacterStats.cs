@@ -22,6 +22,8 @@ public class CharacterStats : MonoBehaviour
     public PlayerQuests questZ;
     [SerializeField]
     private float healthTimer, manaTimer, healthTimerLength, manaTimerLength;
+    [SerializeField]
+    private int healthRegenAmount, manaRegenAmount;
 
     private void Awake()
     {
@@ -45,12 +47,12 @@ public class CharacterStats : MonoBehaviour
         }
         if(healthTimer <= 0 && currentHealth < maxHealth)
         {
-            currentHealth++;
+            currentHealth += healthRegenAmount;
             healthTimer += healthTimerLength;
         }
         if (manaTimer <= 0 && currentMana < maxMana)
         {
-            currentMana++;
+            currentMana += manaRegenAmount;
             manaTimer += manaTimerLength;
         }
         if(healthTimer > 0)
@@ -63,9 +65,7 @@ public class CharacterStats : MonoBehaviour
         }
         if(xp >= xpToNextLevel)
         {
-            xp = 0;
-            level++;
-            xpToNextLevel = (int)((float) xpToNextLevel * 1.2);
+            levelUp();
         }
         
     }
@@ -78,6 +78,8 @@ public class CharacterStats : MonoBehaviour
     public int getMaxHealth(){return maxHealth;}
     public int getMaxMana() { return maxMana; }
     public int getXpToNextLevel(){return xpToNextLevel;}
+    public int getHealthRegen(){return healthRegenAmount;}
+    public int getManaRegen(){return manaRegenAmount;}
     public List<int> getCompletedQuests() { return questZ._quests; }
     //SETTERS
     public void setCurrentHealth(int currentHealth)
@@ -111,6 +113,14 @@ public class CharacterStats : MonoBehaviour
     public void setMaxMana(int maxMana)
     {
         this.maxMana = maxMana;
+    } 
+    public void setHealthRegen(int healthRegen)
+    {
+        this.healthRegenAmount = healthRegen;
+    }
+    public void setManaRegen(int manaRegen)
+    {
+        this.manaRegenAmount = manaRegen;
     }
     public void setCompletedQuests(List<int> completedQuests)
     {
@@ -124,6 +134,17 @@ public class CharacterStats : MonoBehaviour
     public void addCompletedQuest(int questId)
     {
         this.questZ._quests.Add(questId);
+    }
+    private void levelUp()
+    {
+        xp = 0;
+        level++;
+        maxHealth += 10;
+        maxMana += 10;
+        manaRegenAmount++;
+        healthRegenAmount++;
+        strength++;
+        xpToNextLevel = (int)((float)xpToNextLevel * 1.2);
     }
     
 }

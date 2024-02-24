@@ -6,12 +6,15 @@ public class SelfDestruct : MonoBehaviour
 {
     [SerializeField]
     private bool isPlayerProjectile;
-    [SerializeField]
     private int damage;
+    private GameObject player;
     // Start is called before the first frame update
      void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        damage = (int) ((float) player.GetComponent<CharacterStats>().getMaxMana() / 50f);
         StartCoroutine(SelfDestructa());
+
     }
 
      IEnumerator SelfDestructa()
