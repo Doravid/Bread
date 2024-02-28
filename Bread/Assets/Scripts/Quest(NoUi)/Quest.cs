@@ -10,5 +10,6 @@ public class Quest : ScriptableObject
     public bool isComplete;
     public bool isActive;
     public int id;
+    public QuestReward questReward;
 }
 

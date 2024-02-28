@@ -9,12 +9,10 @@ public class HUDStatsManager : MonoBehaviour
     private CharacterStats stats;
     [SerializeField]
     private TMPro.TextMeshProUGUI maxHealth, maxMana, strength, manaRegen, healthRegen; 
-    private bool inStatMenu;
     // Start is called before the first frame update
     void Start()
     {
         stats = GetComponent<CharacterStats>();
-        inStatMenu = false;
         statsMenu.SetActive(false);
     }
 

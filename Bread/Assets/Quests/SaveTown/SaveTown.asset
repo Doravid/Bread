@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def439a045fef754bbb4a000d2e26127, type: 3}
+  m_Name: SaveTown
+  m_EditorClassIdentifier: 
+  quantity: 10
+  quantityCollected: 10
+  collection: {fileID: 3910419712773913181, guid: 36d2594400319cd4a81a6d17a4336872, type: 3}
+  isComplete: 1
+  isActive: 0
+  id: 89
+  questReward: {fileID: 11400000, guid: a5cf9f4c913eefd4482c49574d1d5812, type: 2}

@@ -14,17 +14,21 @@ public class TurnInManager : MonoBehaviour
     private PlayerQuests playerQuests;
     [SerializeField]
     private GameObject prog;
+    private void Awake()
+    {
+        Accept.SetActive(false);
+        TurnIn.SetActive(false);
+    }
 
-    
     void Start()
     {
-        Accept.SetActive(true);
-        TurnIn.SetActive(false);
+        Debug.Log("Quest: " + quest.id + " is active? | " + quest.isActive);
             if (quest.isActive)
             {
-                Accept.SetActive(false);
                 TurnIn.SetActive(true);
-            }
+        }
+        else { Accept.SetActive(true);}
+
             TMPro.TextMeshProUGUI progress = prog.GetComponent<TMPro.TextMeshProUGUI>();  
         if (progress != null)
         {
@@ -43,6 +47,35 @@ public class TurnInManager : MonoBehaviour
             playerQuests._quests_.Remove(quest);
             Destroy(gameObject);
             Destroy(toDestroy);
+            questRewards();
+        }
+    }
+
+    private void questRewards()
+    {
+        if(GameObject.FindGameObjectWithTag("Player") == null) { return; }
+
+        CharacterStats player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStats>();
+        if (quest.questReward.XP != 0)
+        {
+            player.setXp(quest.questReward.XP + player.getXp());
+        }
+        if (quest.questReward.Strength != 0)
+        {
+            player.setStrength(player.getStrength() + quest.questReward.Strength);
+        }
+        if (quest.questReward.MaxMana != 0)
+        {
+            player.setMaxMana(quest.questReward.MaxMana + player.getMaxMana());
+        }
+        if (quest.questReward.MaxHealth != 0)
+        {
+            player.setMaxHealth(quest.questReward.MaxHealth + player.getMaxHealth());
+
+        }
+        if (quest.questReward.Gold != 0)
+        {
+            //GOLD IS FAKE AT THE MOMENT SORRY
         }
     }
 }

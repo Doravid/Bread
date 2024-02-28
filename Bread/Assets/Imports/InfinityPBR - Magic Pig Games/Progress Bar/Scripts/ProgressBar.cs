@@ -50,7 +50,7 @@ namespace MagicPigGames
         {
             if (progress is > 1 or < 0)
             {
-                Debug.LogError($"Progress value must be between 0 and 1. Value was {progress}. Will clamp.");
+                Debug.Log($"Progress value must be between 0 and 1. Value was {progress}. Will clamp.");
                 progress = Mathf.Clamp(progress, 0, 1);
             }
             

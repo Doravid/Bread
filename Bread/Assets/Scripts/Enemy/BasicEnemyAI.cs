@@ -48,6 +48,7 @@ public class BasicEnemyAI : MonoBehaviour
         {
             manager.enemyKilled(gameObject);
             Destroy(gameObject);
+            return;
         }
 
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
@@ -88,7 +89,7 @@ public class BasicEnemyAI : MonoBehaviour
     }
     private void AttackPlayer()
     {
-        if (agent == null) return;
+        if (agent == null || gameObject ==null) return;
         agent.SetDestination(transform.position);
         transform.LookAt(player);
 

@@ -32,8 +32,9 @@ public class CharacterStats : MonoBehaviour
 
     void Start()
     {
-        if (warpPoint != null && warpPoint != "")
+        if (warpPoint != null && warpPoint != "" && GameObject.Find(warpPoint) != null)
         {
+            
             transform.position = GameObject.Find(warpPoint).transform.position;
             warpPoint = "";
         }
@@ -137,7 +138,7 @@ public class CharacterStats : MonoBehaviour
     }
     private void levelUp()
     {
-        xp = 0;
+        xp -= xpToNextLevel;
         level++;
         maxHealth += 10;
         maxMana += 10;

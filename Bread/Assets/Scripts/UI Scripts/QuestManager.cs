@@ -41,12 +41,13 @@ public class QuestManager : MonoBehaviour
             if (obj.GetComponent<BasicEnemyAI>().enemyName == quest.collection.GetComponent<BasicEnemyAI>().enemyName && !quest.isComplete)
             {
                 quest.quantityCollected++; 
-                if(quest.quantity - quest.quantityCollected <= 0)
+                //Legacy Code
+/*                if(quest.quantity - quest.quantityCollected <= 0)
                 {
                     playerQuests._quests_.Remove(quest);
                     quest.isComplete = true;
                     quest.isActive = false;
-                }
+                }*/
             }
         }
     }

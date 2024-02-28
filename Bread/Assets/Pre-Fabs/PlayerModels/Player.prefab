@@ -1215,6 +1215,12 @@ MonoBehaviour:
   HealthBar: {fileID: 7654872380759102428}
   ManaBar: {fileID: 3616902061223131221}
   LevelBar: {fileID: 9190457433456318381}
+  statsMenu: {fileID: 4490663296881649744}
+  maxHealth: {fileID: 1574198395268233958}
+  maxMana: {fileID: 6188688371249282310}
+  strength: {fileID: 374536613025135838}
+  manaRegen: {fileID: 1833990694554331403}
+  healthRegen: {fileID: 2106426517088113435}
 --- !u!114 &7113986641825145844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1876,7 +1882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 348196516069889928}
   m_Layer: 5
-  m_Name: StatText (1)
+  m_Name: StatInts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2356,7 +2362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6197941998071378002
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2375,7 +2381,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -425.9348, y: -186.2699}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1381237678949633796
