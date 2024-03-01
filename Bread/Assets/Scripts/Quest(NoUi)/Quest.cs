@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Custom/Quest")]
 public class Quest : ScriptableObject
 {
     public int quantity, quantityCollected;
@@ -10,6 +10,6 @@ public class Quest : ScriptableObject
     public bool isComplete;
     public bool isActive;
     public int id;
-    public QuestReward questReward;
+    public PlayerBuff questReward;
 }
 

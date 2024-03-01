@@ -6,39 +6,42 @@ using UnityEngine.SceneManagement;
 
 public class CharacterStats : MonoBehaviour
 {
-    
 
-    public string warpPoint;
     //Regenerative Stats (Non-permanant)
     [SerializeField, Header("Status")]
-    private int currentHealth, currentMana, xp;
-   
-    //Stats that affect attacks, skills, etc...
+    private int currentHealth; 
+    [SerializeField]
+    private int currentMana, xp;
+
     [SerializeField, Header("Permanant Stats")]
-    private int strength, level, maxHealth, maxMana, xpToNextLevel;
+    private int strength;
+    [SerializeField] private int level, maxHealth, maxMana, xpToNextLevel;
 
     // Each quest has a unique ID, this array stores all the quest IDs that the player has beaten
-    [SerializeField]
+    [SerializeField, Header("Quest List")]
     public PlayerQuests questZ;
-    [SerializeField]
-    private float healthTimer, manaTimer, healthTimerLength, manaTimerLength;
-    [SerializeField]
+    [Header("Class")]
+    public Class currentClass;
+
+    public string warpPoint;
+
+
+    private float regenTimer, regenTimerLength = 1;
+    [SerializeField, Header("Regeneration Value")]
     private int healthRegenAmount, manaRegenAmount;
 
     private void Awake()
     {
         Save.load(this);
+        Instantiate(currentClass.classModel, transform);
     }
-
     void Start()
     {
         if (warpPoint != null && warpPoint != "" && GameObject.Find(warpPoint) != null)
         {
-            
             transform.position = GameObject.Find(warpPoint).transform.position;
             warpPoint = "";
         }
-
     }
     // Update is called once per frame
     void Update()
@@ -46,24 +49,40 @@ public class CharacterStats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)){
             Save.saveStats(this);
         }
-        if(healthTimer <= 0 && currentHealth < maxHealth)
+        if(regenTimer <= 0)
         {
-            currentHealth += healthRegenAmount;
-            healthTimer += healthTimerLength;
+            if(currentHealth < maxHealth)
+            {
+                if(currentHealth + healthRegenAmount > maxHealth)
+                {
+                    currentHealth = maxHealth;
+                }
+                else
+                {
+                    currentHealth += healthRegenAmount;
+                }
+            }
+
+            if (currentMana < maxMana)
+            {
+                if (currentMana + manaRegenAmount > maxMana)
+                {
+                    currentMana = maxMana;
+                }
+                else
+                {
+                    currentMana += manaRegenAmount;
+                }
+            }
+            
+            regenTimer += regenTimerLength;
         }
-        if (manaTimer <= 0 && currentMana < maxMana)
+
+        if(regenTimer > 0)
         {
-            currentMana += manaRegenAmount;
-            manaTimer += manaTimerLength;
+            regenTimer -= Time.deltaTime;
         }
-        if(healthTimer > 0)
-        {
-            healthTimer -= Time.deltaTime;
-        }
-        if(manaTimer > 0)
-        {
-            manaTimer -= Time.deltaTime;
-        }
+
         if(xp >= xpToNextLevel)
         {
             levelUp();
@@ -147,5 +166,26 @@ public class CharacterStats : MonoBehaviour
         strength++;
         xpToNextLevel = (int)((float)xpToNextLevel * 1.2);
     }
-    
+    private void loadBuff(PlayerBuff buff)
+    {
+            if (buff.alreadyApplied) return;
+        //ADDS UNAPPLIED BUFFS to: XP, Strength, MaxMana, and MaxHealth.
+        xp += buff.XP;
+        strength += buff.XP;
+        maxMana += buff.XP;
+        maxHealth += buff.XP;
+        buff.alreadyApplied = true;
+    }
+
+    private void removeBuff(PlayerBuff buff)
+    {
+        if (!buff.alreadyApplied) Debug.LogError(buff.name + " has already been removed!");
+        if (xp != 0) Debug.LogError(buff.name + " should not be removed, it is a permanant buff! (xp != 0)");
+        //ADDS UNAPPLIED BUFFS to: XP, Strength, MaxMana, and MaxHealth.
+        strength -= buff.XP;
+        maxMana -= buff.XP;
+        maxHealth -= buff.XP;
+        buff.alreadyApplied = false;
+    }
+
 }

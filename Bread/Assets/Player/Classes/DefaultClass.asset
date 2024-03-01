@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd160fa0b6a6c7b4f8379e02326e8bb0, type: 3}
+  m_Name: DefaultClass
+  m_EditorClassIdentifier: 
+  className: Dough
+  classModel: {fileID: 6104847430629412179, guid: 66ca6502671af68419b57c9fd9da544e, type: 3}
+  buff: {fileID: 11400000, guid: 27324e0cbb181ba42ab9349ea57179b4, type: 2}
