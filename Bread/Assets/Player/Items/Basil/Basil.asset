@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 083270fe9d0a5c5488b637e0548d5285, type: 3}
+  m_Name: Basil
+  m_EditorClassIdentifier: 
+  quantity: 0
+  maxStack: 0
+  sellValue: 0
+  itemModel: {fileID: 0}
+  itemImage: {fileID: 21300000, guid: 4480a3e9d56ceb344ac0afd824d157a4, type: 3}
+  buff: {fileID: 11400000, guid: 8607c77f085aea24facfd3000b207c0a, type: 2}
+  equipmentType: Seasoning
+  itemName: Basil

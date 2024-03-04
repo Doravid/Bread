@@ -2,6 +2,7 @@ using MagicPigGames;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HUDStatsManager : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class HUDStatsManager : MonoBehaviour
         stats = GetComponent<CharacterStats>();
         statsMenu.SetActive(false);
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -37,10 +37,11 @@ public class HUDStatsManager : MonoBehaviour
 
     private void toggleStatMenu()
     {
+
         updateStats();
         statsMenu.SetActive(!statsMenu.activeSelf);
     }
-    private void updateStats()
+    public void updateStats()
     {
         maxHealth.text = stats.getMaxHealth().ToString();
         maxMana.text = stats.getMaxMana().ToString();

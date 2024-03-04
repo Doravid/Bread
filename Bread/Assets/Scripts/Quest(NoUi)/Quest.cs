@@ -10,6 +10,10 @@ public class Quest : ScriptableObject
     public bool isComplete;
     public bool isActive;
     public int id;
+    public int previousQuestId;
     public PlayerBuff questReward;
+    public string questName, questDescription;
+    public Sprite questIcon;
+    
 }
 

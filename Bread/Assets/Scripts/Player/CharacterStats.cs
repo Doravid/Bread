@@ -22,7 +22,6 @@ public class CharacterStats : MonoBehaviour
     public PlayerQuests questZ;
     [Header("Class")]
     public Class currentClass;
-
     public string warpPoint;
 
 
@@ -100,7 +99,7 @@ public class CharacterStats : MonoBehaviour
     public int getXpToNextLevel(){return xpToNextLevel;}
     public int getHealthRegen(){return healthRegenAmount;}
     public int getManaRegen(){return manaRegenAmount;}
-    public List<int> getCompletedQuests() { return questZ._quests; }
+    public List<Quest> getCompletedQuests() { return questZ.completedQuests; }
     //SETTERS
     public void setCurrentHealth(int currentHealth)
     {
@@ -142,18 +141,18 @@ public class CharacterStats : MonoBehaviour
     {
         this.manaRegenAmount = manaRegen;
     }
-    public void setCompletedQuests(List<int> completedQuests)
+    public void setCompletedQuests(List<Quest> completedQuests)
     {
-        this.questZ._quests = completedQuests;
+        this.questZ.completedQuests = completedQuests;
     }
     //Custom Functions
     public void dealDamage(int damage)
     {
         this.currentHealth -= damage;
     }
-    public void addCompletedQuest(int questId)
+    public void addCompletedQuest(Quest quest)
     {
-        this.questZ._quests.Add(questId);
+        this.questZ.completedQuests.Add(quest);
     }
     private void levelUp()
     {
@@ -166,25 +165,26 @@ public class CharacterStats : MonoBehaviour
         strength++;
         xpToNextLevel = (int)((float)xpToNextLevel * 1.2);
     }
-    private void loadBuff(PlayerBuff buff)
+    public void loadBuff(PlayerBuff buff)
     {
+        Debug.Log(buff.Strength);
             if (buff.alreadyApplied) return;
         //ADDS UNAPPLIED BUFFS to: XP, Strength, MaxMana, and MaxHealth.
         xp += buff.XP;
-        strength += buff.XP;
-        maxMana += buff.XP;
-        maxHealth += buff.XP;
+        strength += buff.Strength;
+        maxMana += buff.MaxMana;
+        maxHealth += buff.MaxHealth;
         buff.alreadyApplied = true;
     }
 
-    private void removeBuff(PlayerBuff buff)
+    public void removeBuff(PlayerBuff buff)
     {
         if (!buff.alreadyApplied) Debug.LogError(buff.name + " has already been removed!");
-        if (xp != 0) Debug.LogError(buff.name + " should not be removed, it is a permanant buff! (xp != 0)");
+        if (buff.XP != 0) Debug.LogError(buff.name + " should not be removed, it is a permanant buff! (xp != 0)");
         //ADDS UNAPPLIED BUFFS to: XP, Strength, MaxMana, and MaxHealth.
-        strength -= buff.XP;
-        maxMana -= buff.XP;
-        maxHealth -= buff.XP;
+        strength -= buff.Strength;
+        maxMana -= buff.MaxMana;
+        maxHealth -= buff.MaxHealth;
         buff.alreadyApplied = false;
     }
 

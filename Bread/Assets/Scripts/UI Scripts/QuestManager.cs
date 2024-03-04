@@ -23,7 +23,7 @@ public class QuestManager : MonoBehaviour
     public void startQuest(Quest newQuest)
     {
         Debug.Log(newQuest.quantity);
-        playerQuests._quests_.Add(newQuest);
+        playerQuests.currentQuests.Add(newQuest);
         newQuest.isActive = true;
     }
     public void enemyKilled(GameObject obj)
@@ -35,7 +35,7 @@ public class QuestManager : MonoBehaviour
     private void incrementQuests(GameObject obj)
     {
 
-        foreach (Quest quest in playerQuests._quests_)
+        foreach (Quest quest in playerQuests.currentQuests)
         {
 
             if (obj.GetComponent<BasicEnemyAI>().enemyName == quest.collection.GetComponent<BasicEnemyAI>().enemyName && !quest.isComplete)

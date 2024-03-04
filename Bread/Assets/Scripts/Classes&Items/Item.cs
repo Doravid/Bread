@@ -10,7 +10,7 @@ public class Item : ScriptableObject
     public GameObject itemModel;
     public Sprite itemImage;
     public PlayerBuff buff;
-    public bool equipable;
+    public string equipmentType;
     public string itemName;
 }
 

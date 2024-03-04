@@ -420,6 +420,22 @@ public class SUPERCharacterAIO : MonoBehaviour{
         
     }
     void Update(){
+
+            if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyUp(KeyCode.Tab))
+            {
+                if (Cursor.lockState == CursorLockMode.Locked)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    //controllerPaused = true;
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    //controllerPaused = false;
+                }
+            }
         if(!controllerPaused){
         #region Input
         #if ENABLE_INPUT_SYSTEM

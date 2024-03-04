@@ -43,12 +43,16 @@ public class TurnInManager : MonoBehaviour
         {
             quest.isActive = false;
             quest.isComplete = true;
-            playerQuests._quests.Add(quest.id);
-            playerQuests._quests_.Remove(quest);
+            playerQuests.completedQuests.Add(quest);
+            playerQuests.currentQuests.Remove(quest);
             Destroy(gameObject);
             Destroy(toDestroy);
             questRewards();
         }
+    }
+    public void acceptQuest()
+    {
+
     }
 
     private void questRewards()

@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory:
   - {fileID: 11400000, guid: 217a1a7e4d147b047852080872a9dcd0, type: 2}
-  equiped: []
+  - {fileID: 11400000, guid: bb7e2e6f651ff3d4688a895077520b4a, type: 2}
+  - {fileID: 11400000, guid: 57677afed733315459484c4a68cb2d65, type: 2}
+  Crust: {fileID: 0}
+  Seasoning1: {fileID: 0}
+  Seasoning2: {fileID: 0}
+  Coating: {fileID: 0}
