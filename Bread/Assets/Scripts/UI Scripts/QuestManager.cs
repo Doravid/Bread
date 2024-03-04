@@ -22,7 +22,6 @@ public class QuestManager : MonoBehaviour
     }
     public void startQuest(Quest newQuest)
     {
-        Debug.Log(newQuest.quantity);
         playerQuests.currentQuests.Add(newQuest);
         newQuest.isActive = true;
     }

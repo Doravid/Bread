@@ -16,6 +16,7 @@ public class QuestInit : MonoBehaviour
     private TextMeshProUGUI questName;
     [SerializeField]
     private Image questSymbol;
+    public GameObject description;
     private void Start()
     {
         init();
@@ -27,5 +28,9 @@ public class QuestInit : MonoBehaviour
 
         questName.text = questA.questName;
         questSymbol.sprite = questA.questIcon;
+    }
+    public void openQuest()
+    {
+        description.SetActive(true);
     }
 }

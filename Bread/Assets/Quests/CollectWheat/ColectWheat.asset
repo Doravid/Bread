@@ -15,7 +15,7 @@ MonoBehaviour:
   quantity: 10
   quantityCollected: 10
   collection: {fileID: 5249437868046761955, guid: e1e2710370fc63c47bf29a5399d5a9d1, type: 3}
-  isComplete: 1
+  isComplete: 0
   isActive: 0
   id: 1
   previousQuestId: 0

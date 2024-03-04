@@ -6,23 +6,37 @@ using UnityEngine.UI;
 
 public class TurnInManager : MonoBehaviour
 {
+    [SerializeField] string npcName;
     [SerializeField]
-    private GameObject Accept, TurnIn, toDestroy;
+    private GameObject Accept, TurnIn, ButtonPrefab;
     [SerializeField]
     private Quest quest;
     [SerializeField]
     private PlayerQuests playerQuests;
     [SerializeField]
     private GameObject prog;
+    [SerializeField] private QuestManager questManager;
+
+    [SerializeField] Image questIcon;
+    [SerializeField] TextMeshProUGUI title, description;
+
+    private GameObject button;
     private void Awake()
     {
         Accept.SetActive(false);
         TurnIn.SetActive(false);
+        title.text = quest.questName;
+        description.text = quest.questDescription;
+        questIcon.sprite = quest.questIcon;
     }
 
     void Start()
     {
-        Debug.Log("Quest: " + quest.id + " is active? | " + quest.isActive);
+        GameObject parent = GameObject.Find(npcName);
+        button = Instantiate(ButtonPrefab, parent.transform);
+        button.GetComponent<QuestInit>().description = gameObject;
+       
+
             if (quest.isActive)
             {
                 TurnIn.SetActive(true);
@@ -46,13 +60,15 @@ public class TurnInManager : MonoBehaviour
             playerQuests.completedQuests.Add(quest);
             playerQuests.currentQuests.Remove(quest);
             Destroy(gameObject);
-            Destroy(toDestroy);
+            Destroy(button);
             questRewards();
         }
     }
     public void acceptQuest()
     {
-
+        questManager.startQuest(quest);
+        Accept.gameObject.SetActive(false);
+        TurnIn.gameObject.SetActive(true);
     }
 
     private void questRewards()
