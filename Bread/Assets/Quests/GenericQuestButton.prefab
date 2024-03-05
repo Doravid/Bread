@@ -110,10 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d98d340856b8944ab6f0beb41ecca68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quest: {fileID: 11400000, guid: 08febaf67c2d7314ba8baa102f7c52cd, type: 2}
+  quests: {fileID: 11400000, guid: 08febaf67c2d7314ba8baa102f7c52cd, type: 2}
   questA: {fileID: 11400000, guid: aa39671821f4fc548933c3befc3f5041, type: 2}
   questName: {fileID: 8745954928764205767}
   questSymbol: {fileID: 1866637155972413027}
+  description: {fileID: 4727920934464313596}
 --- !u!1 &2341560177100099143
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +348,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4480a3e9d56ceb344ac0afd824d157a4, type: 3}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -423,7 +424,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Collect Wheat
+  m_text: QUEST NAME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -450,7 +451,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 114.6
+  m_fontSize: 113.45
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1

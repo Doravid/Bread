@@ -9,9 +9,8 @@ using UnityEngine.UI;
 public class QuestInit : MonoBehaviour
 {
     [SerializeField]
-    private PlayerQuests quest;
-    [SerializeField]
-    private Quest questA;
+    private PlayerQuests quests;
+    public Quest questA;
     [SerializeField]
     private TextMeshProUGUI questName;
     [SerializeField]
@@ -23,7 +22,7 @@ public class QuestInit : MonoBehaviour
     }
     public void init()
     {
-        if (quest.completedQuests.Contains(questA))
+        if (quests.completedQuests.Contains(questA))
             Destroy(this.GameObject());
 
         questName.text = questA.questName;

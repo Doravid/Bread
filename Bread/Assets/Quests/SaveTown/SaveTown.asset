@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: SaveTown
   m_EditorClassIdentifier: 
   quantity: 10
-  quantityCollected: 10
+  quantityCollected: 0
   collection: {fileID: 3910419712773913181, guid: 36d2594400319cd4a81a6d17a4336872, type: 3}
-  isComplete: 1
+  isComplete: 0
   isActive: 0
   id: 2
   previousQuestId: 1
   questReward: {fileID: 11400000, guid: a5cf9f4c913eefd4482c49574d1d5812, type: 2}
+  questName: Save Town
+  questDescription: Please save the town from the evil charcoal!
+  questIcon: {fileID: 21300000, guid: 6c1ce6737b06c924f96a06359da012b8, type: 3}

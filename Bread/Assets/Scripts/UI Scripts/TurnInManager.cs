@@ -6,11 +6,19 @@ using UnityEngine.UI;
 
 public class TurnInManager : MonoBehaviour
 {
-    [SerializeField] string npcName;
-    [SerializeField]
-    private GameObject Accept, TurnIn, ButtonPrefab;
-    [SerializeField]
+    public class VariableHolder
+    {
+
+    }
+    [SerializeField, Header("Set These Varibles")]
     private Quest quest;
+    [SerializeField] private string npcName;
+    [Space, Header("Do not touch. I'm not sure hiding these breaks stuff, so they stay"), Space]
+
+    [SerializeField]
+    private GameObject Accept;
+    [SerializeField]
+    private GameObject TurnIn, ButtonPrefab;
     [SerializeField]
     private PlayerQuests playerQuests;
     [SerializeField]
@@ -20,7 +28,11 @@ public class TurnInManager : MonoBehaviour
     [SerializeField] Image questIcon;
     [SerializeField] TextMeshProUGUI title, description;
 
+    public VariableHolder instance = new VariableHolder();
+
     private GameObject button;
+
+    private List<int> completedQuestIds;
     private void Awake()
     {
         Accept.SetActive(false);
@@ -28,22 +40,22 @@ public class TurnInManager : MonoBehaviour
         title.text = quest.questName;
         description.text = quest.questDescription;
         questIcon.sprite = quest.questIcon;
+        if (questManager == null)
+        {
+            questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+        }
     }
 
     void Start()
     {
-        GameObject parent = GameObject.Find(npcName);
-        button = Instantiate(ButtonPrefab, parent.transform);
-        button.GetComponent<QuestInit>().description = gameObject;
-       
-
-            if (quest.isActive)
-            {
-                TurnIn.SetActive(true);
+        initButton();
+        if (quest.isActive)
+        {
+            TurnIn.SetActive(true);
         }
-        else { Accept.SetActive(true);}
+        else { Accept.SetActive(true); }
 
-            TMPro.TextMeshProUGUI progress = prog.GetComponent<TMPro.TextMeshProUGUI>();  
+        TMPro.TextMeshProUGUI progress = prog.GetComponent<TMPro.TextMeshProUGUI>();
         if (progress != null)
         {
             Debug.Log(progress.text);
@@ -62,6 +74,8 @@ public class TurnInManager : MonoBehaviour
             Destroy(gameObject);
             Destroy(button);
             questRewards();
+
+            refreshQuests();
         }
     }
     public void acceptQuest()
@@ -69,6 +83,34 @@ public class TurnInManager : MonoBehaviour
         questManager.startQuest(quest);
         Accept.gameObject.SetActive(false);
         TurnIn.gameObject.SetActive(true);
+    }
+    private void parseCompletedQuests()
+    {
+        Debug.Log("Count Quests COmpleted: " + playerQuests.completedQuests.Count);
+        completedQuestIds = new List<int>();
+        foreach (Quest quest in playerQuests.completedQuests)
+        {
+            completedQuestIds.Add(quest.id);
+        }
+        Debug.Log("Count Quests Completed: " + completedQuestIds.Count);
+    }
+
+    public void initButton(){
+        Debug.Log("Button Null: " + button==null);
+        parseCompletedQuests();
+        Debug.Log("Count Quests Completed: " + completedQuestIds.Count);
+        if (button != null) return;
+        if (completedQuestIds.Contains(quest.previousQuestId) || quest.previousQuestId == 0) {
+            
+            GameObject parent = GameObject.Find(npcName);
+        
+        button = Instantiate(ButtonPrefab, parent.transform);
+        QuestInit qInit = button.GetComponent<QuestInit>();
+        button.GetComponent<QuestInit>().description = gameObject;
+        button.GetComponent<Button>().onClick.AddListener(customOnClick);
+            qInit.questA = quest;
+            qInit.init();
+        }
     }
 
     private void questRewards()
@@ -96,6 +138,25 @@ public class TurnInManager : MonoBehaviour
         if (quest.questReward.Gold != 0)
         {
             //GOLD IS FAKE AT THE MOMENT SORRY
+        }
+    }
+    private void customOnClick()
+    {
+        int numquests = transform.parent.childCount;
+        for(int i = 0; i < numquests; i++)
+        {
+            transform.parent.GetChild(i).GetChild(0).gameObject.SetActive(false);
+        }
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+    private void refreshQuests()
+    {
+        
+        int numQuests = transform.parent.childCount;
+        Debug.Log(numQuests);
+        for(int i = 0; i < numQuests; i++)
+        {
+            transform.parent.GetChild(i).GetComponent<TurnInManager>().initButton();
         }
     }
 }
