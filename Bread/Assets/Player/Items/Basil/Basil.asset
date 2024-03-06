@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083270fe9d0a5c5488b637e0548d5285, type: 3}
   m_Name: Basil
   m_EditorClassIdentifier: 
-  quantity: 0
-  maxStack: 0
+  quantity: 1
+  maxStack: 1
   sellValue: 0
   itemModel: {fileID: 0}
   itemImage: {fileID: 21300000, guid: 4480a3e9d56ceb344ac0afd824d157a4, type: 3}

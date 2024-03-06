@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def439a045fef754bbb4a000d2e26127, type: 3}
   m_Name: ColectWheat
   m_EditorClassIdentifier: 
-  quantity: 10
-  quantityCollected: 10
-  collection: {fileID: 5249437868046761955, guid: e1e2710370fc63c47bf29a5399d5a9d1, type: 3}
-  isComplete: 1
+  quantity: 5
+  quantityCollected: 0
+  collection: {fileID: 5257896475294940000, guid: 5cfed47e516d15644b3574f6969c482a, type: 3}
+  isComplete: 0
   isActive: 0
   id: 1
   previousQuestId: 0
   questReward: {fileID: 11400000, guid: a5cf9f4c913eefd4482c49574d1d5812, type: 2}
   questName: Collect Wheat
   questDescription: I need help collecting my wheat! The wind blew it all away, please
-    collect all ten I harvested today!
+    collect all five I harvested today!
   questIcon: {fileID: 21300000, guid: 4480a3e9d56ceb344ac0afd824d157a4, type: 3}

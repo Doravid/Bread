@@ -1,5 +1,7 @@
+using SUPERCharacter;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,7 +21,9 @@ public class CharacterStats : MonoBehaviour
 
     // Each quest has a unique ID, this array stores all the quest IDs that the player has beaten
     [SerializeField, Header("Quest List")]
-    public PlayerQuests questZ;
+    public PlayerQuests playerQuests;
+    [SerializeField, Header("Quest List")]
+    public InventoryManager playerInventory;
     [Header("Class")]
     public Class currentClass;
     public string warpPoint;
@@ -99,7 +103,7 @@ public class CharacterStats : MonoBehaviour
     public int getXpToNextLevel(){return xpToNextLevel;}
     public int getHealthRegen(){return healthRegenAmount;}
     public int getManaRegen(){return manaRegenAmount;}
-    public List<Quest> getCompletedQuests() { return questZ.completedQuests; }
+    public List<Quest> getCompletedQuests() { return playerQuests.completedQuests; }
     //SETTERS
     public void setCurrentHealth(int currentHealth)
     {
@@ -143,7 +147,7 @@ public class CharacterStats : MonoBehaviour
     }
     public void setCompletedQuests(List<Quest> completedQuests)
     {
-        this.questZ.completedQuests = completedQuests;
+        this.playerQuests.completedQuests = completedQuests;
     }
     //Custom Functions
     public void dealDamage(int damage)
@@ -152,7 +156,7 @@ public class CharacterStats : MonoBehaviour
     }
     public void addCompletedQuest(Quest quest)
     {
-        this.questZ.completedQuests.Add(quest);
+        this.playerQuests.completedQuests.Add(quest);
     }
     private void levelUp()
     {
@@ -186,6 +190,38 @@ public class CharacterStats : MonoBehaviour
         maxMana -= buff.MaxMana;
         maxHealth -= buff.MaxHealth;
         buff.alreadyApplied = false;
+    }
+    public void enemyKilled(GameObject obj)
+    {
+        incrementEnemyQuest(obj);
+                BasicEnemyAI enemy = obj.GetComponent<BasicEnemyAI>();
+        xp += enemy.xpValue;
+    }
+    public void collectItem(Item item)
+    {
+        incrementItemQuest(item);
+        playerInventory.addItem(item);
+    }
+    private void incrementEnemyQuest(GameObject obj)
+    {
+        foreach (Quest quest in playerQuests.currentQuests)
+        {
+            if (obj.GetComponent<BasicEnemyAI>().enemyName == quest.collection.GetComponent<BasicEnemyAI>().enemyName && !quest.isComplete)
+            {
+                quest.quantityCollected++;
+            }
+        }
+    }
+    private void incrementItemQuest(Item item)
+    {
+        foreach (Quest quest in playerQuests.currentQuests)
+        {
+            //if (quest.GetComponent<ICollectable>() == null) return;
+            if (item.itemName == quest.collection.GetComponent<ICollectable>().item.itemName && !quest.isComplete)
+            {
+                quest.quantityCollected++;
+            }
+        }
     }
 
 }

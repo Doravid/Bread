@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: InvisibleBreadAmulet
   m_EditorClassIdentifier: 
   quantity: 0
-  maxStack: 0
+  maxStack: 1
   sellValue: 0
   itemModel: {fileID: 0}
   itemImage: {fileID: 21300000, guid: 0c231c4088ac1184b90cbec35751bbde, type: 3}

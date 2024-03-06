@@ -39,14 +39,14 @@ public class BasicEnemyAI : MonoBehaviour
         }
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player").transform ;
-        manager = GameObject.Find("QuestUIController").GetComponent<QuestManager>();
+        manager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
     }
     private void Update()
     {
         //Kills self on 0 HP
         if (health <= 0)
         {
-            manager.enemyKilled(gameObject);
+            player.GetComponent<CharacterStats>().enemyKilled(gameObject);
             Destroy(gameObject);
             return;
         }
@@ -108,8 +108,5 @@ public class BasicEnemyAI : MonoBehaviour
     {
         alreadyAttacked = false;
     }
-
-
-
 }
 

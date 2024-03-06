@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,13 +52,68 @@ public class InventoryManager : MonoBehaviour
     }
     private void spawnItem(Item item)
     {
+        int quantity = item.quantity;
+        int quantHolder = quantity;
+  
+        while(quantity >= item.maxStack)
+        {
+            item.quantity = item.maxStack;
+            GameObject tempItemA = Instantiate(itemPrefabTemplate, transform, false);
+            tempItemA.GetComponent<ItemInit>().spawnItem(item);
+            quantity -= item.maxStack;
+        }
+        item.quantity = quantHolder;
+        item.quantity %= item.maxStack;
+        if (item.quantity == 0)
+        {
+            item.quantity = quantHolder;
+            return;
+        }
         GameObject tempItem = Instantiate(itemPrefabTemplate, transform, false);
         tempItem.GetComponent<ItemInit>().spawnItem(item);
+        item.quantity = quantHolder;
     }
     public void addItem(Item item)
     {
-        GameObject tempItem = Instantiate(itemPrefabTemplate, transform, false);
-        tempItem.GetComponent<ItemInit>().spawnItem(item);
-        inventory.inventory.Add(item);  
+        int quantity = item.quantity;
+
+        if (item.quantity == 0)
+        {
+            Debug.Log("First Item Pickup");
+            item.quantity = 1;
+            GameObject tempItem = Instantiate(itemPrefabTemplate, transform, false);
+            tempItem.GetComponent<ItemInit>().spawnItem(item);
+            inventory.inventory.Add(item);
+        }
+
+        else if ((item.quantity % item.maxStack) == 0)
+        {
+            Debug.Log("There");
+            item.quantity++;
+            item.quantity %= item.maxStack;
+            GameObject tempItem = Instantiate(itemPrefabTemplate, transform, false);
+            tempItem.GetComponent<ItemInit>().spawnItem(item);
+            item.quantity = ++quantity;
+        }
+        else
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Item aliveItem = transform.GetChild(i).GetComponent<ItemInit>().item;
+                if ((int.Parse(transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text) % aliveItem.maxStack) != 0 && aliveItem.itemName.Equals(item.itemName))
+                {
+                    Destroy(transform.GetChild(i).gameObject);
+                    GameObject tempItem = Instantiate(itemPrefabTemplate, transform, false);
+                    item.quantity %= item.maxStack;
+                    item.quantity++;
+                    tempItem.GetComponent<ItemInit>().spawnItem(item);
+                    item.quantity = ++quantity;
+                    break;
+                }
+            }
+        }
+
+
+
     }
 }

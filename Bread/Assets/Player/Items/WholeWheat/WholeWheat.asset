@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083270fe9d0a5c5488b637e0548d5285, type: 3}
   m_Name: WholeWheat
   m_EditorClassIdentifier: 
-  quantity: 0
-  maxStack: 0
+  quantity: 1
+  maxStack: 1
   sellValue: 0
   itemModel: {fileID: 0}
   itemImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

@@ -12,7 +12,7 @@ public class TurnInManager : MonoBehaviour
     }
     [SerializeField, Header("Set These Varibles")]
     private Quest quest;
-    [SerializeField] private string npcName;
+    [SerializeField] private GameObject npc;
     [Space, Header("Do not touch. I'm not sure hiding these breaks stuff, so they stay"), Space]
 
     [SerializeField]
@@ -54,14 +54,8 @@ public class TurnInManager : MonoBehaviour
             TurnIn.SetActive(true);
         }
         else { Accept.SetActive(true); }
+        updateProgress();
 
-        TMPro.TextMeshProUGUI progress = prog.GetComponent<TMPro.TextMeshProUGUI>();
-        if (progress != null)
-        {
-            Debug.Log(progress.text);
-            progress.text = quest.quantityCollected + "/" + quest.quantity;
-            Debug.Log(progress.text);
-        }
     }
     public void tryQuestTurnIn()
     {
@@ -86,25 +80,21 @@ public class TurnInManager : MonoBehaviour
     }
     private void parseCompletedQuests()
     {
-        Debug.Log("Count Quests COmpleted: " + playerQuests.completedQuests.Count);
         completedQuestIds = new List<int>();
         foreach (Quest quest in playerQuests.completedQuests)
         {
             completedQuestIds.Add(quest.id);
         }
-        Debug.Log("Count Quests Completed: " + completedQuestIds.Count);
     }
 
     public void initButton(){
-        Debug.Log("Button Null: " + button==null);
         parseCompletedQuests();
-        Debug.Log("Count Quests Completed: " + completedQuestIds.Count);
         if (button != null) return;
         if (completedQuestIds.Contains(quest.previousQuestId) || quest.previousQuestId == 0) {
-            
-            GameObject parent = GameObject.Find(npcName);
-        
-        button = Instantiate(ButtonPrefab, parent.transform);
+
+            Debug.LogWarning(ButtonPrefab == null);
+            GameObject gameObject1 = Instantiate(ButtonPrefab, npc.transform);
+            button = gameObject1;
         QuestInit qInit = button.GetComponent<QuestInit>();
         button.GetComponent<QuestInit>().description = gameObject;
         button.GetComponent<Button>().onClick.AddListener(customOnClick);
@@ -149,14 +139,21 @@ public class TurnInManager : MonoBehaviour
         }
         transform.GetChild(0).gameObject.SetActive(true);
     }
-    private void refreshQuests()
+    public void refreshQuests()
     {
-        
+        updateProgress();
         int numQuests = transform.parent.childCount;
-        Debug.Log(numQuests);
         for(int i = 0; i < numQuests; i++)
         {
             transform.parent.GetChild(i).GetComponent<TurnInManager>().initButton();
+        }
+    }
+    private void updateProgress()
+    {
+        TMPro.TextMeshProUGUI progress = prog.GetComponent<TMPro.TextMeshProUGUI>();
+        if (progress != null)
+        {
+            progress.text = quest.quantityCollected + "/" + quest.quantity;
         }
     }
 }

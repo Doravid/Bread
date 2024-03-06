@@ -44,6 +44,11 @@ public class QuestManager : MonoBehaviour
     //UI Managment (I may want to move these later as they server a different function to the rest of the class)
     public void toggleMenu()
     {
+        GameObject right = panelUI.transform.GetChild(1).gameObject;
+        for(int i = 0; i < right.transform.childCount; i++)
+        {
+            right.transform.GetChild(i).GetComponent<TurnInManager>().refreshQuests();
+        }
         if (!inUI)
         {
             inUI = true;
