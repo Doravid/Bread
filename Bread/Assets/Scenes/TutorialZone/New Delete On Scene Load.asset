@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c6f7113cc943c4aac387606cc07d68, type: 3}
+  m_Name: New Delete On Scene Load
+  m_EditorClassIdentifier: 
+  objectsToDelete:
+  - {fileID: 6817638361354391147, guid: 32fce1012f8c24c43af86f00f457f500, type: 3}

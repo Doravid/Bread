@@ -14,8 +14,16 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Image CoatingSprite;
     private CharacterStats characterStats;
 
-    
+    //GetRidOf futrure me
+    public Item testItem;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            removeItem(testItem, 6);
+        }
+    }
     private void Awake()
     {
         characterStats = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStats>();
@@ -72,6 +80,46 @@ public class InventoryManager : MonoBehaviour
         GameObject tempItem = Instantiate(itemPrefabTemplate, transform, false);
         tempItem.GetComponent<ItemInit>().spawnItem(item);
         item.quantity = quantHolder;
+    }
+    public void removeItem(Item item)
+    {
+        
+    inventory.inventory.Remove(item);
+
+        int numItems = transform.childCount;
+        for(int i = 0; i < numItems; i++)
+        {
+            if (transform.GetChild(i).GetComponent<ItemInit>().item.itemName.Equals(item.itemName))
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+        }
+    }
+    public void removeItem(Item item, int amount)
+    {
+        if(amount >= item.quantity)
+        {
+            removeItem(item);
+            return;
+        }
+        item.quantity -= amount;
+        int amountLeft = amount;
+        int numItems = transform.childCount;
+        for (int i = numItems-1; i >= 0; i--)
+        {
+            if (!transform.GetChild(i).GetComponent<ItemInit>().item.itemName.Equals(item.itemName)) continue;
+            if (int.Parse(transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text) < amountLeft)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+                amountLeft -= int.Parse(transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text);
+            }
+            else {
+                transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text =
+                    (int.Parse(transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text) -amountLeft).ToString();
+                break;
+            }
+        }
+
     }
     public void addItem(Item item)
     {

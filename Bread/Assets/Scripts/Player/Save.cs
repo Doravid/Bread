@@ -47,4 +47,8 @@ public class Save : MonoBehaviour
         stats.setManaRegen(PlayerPrefs.GetInt("MANAREGEN", stats.getManaRegen()));
         stats.warpPoint = PlayerPrefs.GetString("WARPTO", "");
     }
+    public static void saveObejcts()
+    {
+
+    }
 }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def439a045fef754bbb4a000d2e26127, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  quantity: 1
+  quantityCollected: 1
+  collection: {fileID: 0}
+  isComplete: 1
+  isActive: 0
+  id: 2
+  previousQuestId: 1
+  questReward: {fileID: 11400000, guid: ff557a3102e5b8b4aaec142b440fb711, type: 2}
+  questName: Deliver A Message!
+  questDescription: I miss my bread son, please go into town and tell him to come
+    visit me! I started up the ol' wormhole so you can get there nice and quick.
+  questIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

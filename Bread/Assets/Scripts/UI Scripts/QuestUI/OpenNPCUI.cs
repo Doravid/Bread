@@ -24,7 +24,10 @@ public class OpenNPCUI : MonoBehaviour
         {
             buttonPromt.SetActive(!manager.isInUI());
         }
-        else { buttonPromt.SetActive(false); }
+        else {
+
+            Cursor.visible = false;
+        }
         if (Input.GetKeyDown(KeyCode.E) && playerInSightRange){
             manager.toggleMenu();
             

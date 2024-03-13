@@ -17,8 +17,8 @@ MonoBehaviour:
   collection: {fileID: 3910419712773913181, guid: 36d2594400319cd4a81a6d17a4336872, type: 3}
   isComplete: 0
   isActive: 0
-  id: 2
-  previousQuestId: 1
+  id: 3
+  previousQuestId: 2
   questReward: {fileID: 11400000, guid: a5cf9f4c913eefd4482c49574d1d5812, type: 2}
   questName: Save Town
   questDescription: Please save the town from the evil charcoal!

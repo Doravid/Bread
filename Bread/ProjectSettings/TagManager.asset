@@ -6,6 +6,8 @@ TagManager:
   tags:
   - QuestMenu
   - Enemy
+  - Inventory
+  - DeleteOnSceneLoad
   layers:
   - Default
   - TransparentFX

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59b4ef4dfe87a94494ee79c6a081c47, type: 3}
   m_Name: Inventory
   m_EditorClassIdentifier: 
-  inventory:
-  - {fileID: 11400000, guid: d013af1f16da9f04782e550fb7f0e2d2, type: 2}
+  inventory: []
   Crust: {fileID: 0}
   Seasoning1: {fileID: 0}
   Seasoning2: {fileID: 0}

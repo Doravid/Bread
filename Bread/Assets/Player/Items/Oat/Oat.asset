@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083270fe9d0a5c5488b637e0548d5285, type: 3}
   m_Name: Oat
   m_EditorClassIdentifier: 
-  quantity: 0
+  quantity: 1
   maxStack: 5
   sellValue: 0
   itemModel: {fileID: 5257896475294940000, guid: 5cfed47e516d15644b3574f6969c482a, type: 3}
