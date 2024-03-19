@@ -14,6 +14,5 @@ public class Quest : ScriptableObject
     public PlayerBuff questReward;
     public string questName, questDescription;
     public Sprite questIcon;
-    
 }
 
