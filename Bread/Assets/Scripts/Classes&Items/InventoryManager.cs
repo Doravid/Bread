@@ -13,17 +13,6 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Image Seasoning2Sprite;
     [SerializeField] private Image CoatingSprite;
     private CharacterStats characterStats;
-
-    //GetRidOf futrure me
-    public Item testItem;
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            removeItem(testItem, 6);
-        }
-    }
     private void Awake()
     {
         characterStats = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStats>();
@@ -123,6 +112,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void addItem(Item item)
     {
+        Debug.Log("Add Item: " + item.name);
         int quantity = item.quantity;
 
         if (item.quantity == 0)
@@ -160,8 +150,5 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-
-
-
     }
 }

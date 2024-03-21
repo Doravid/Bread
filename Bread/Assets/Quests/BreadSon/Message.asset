@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Message
   m_EditorClassIdentifier: 
   quantity: 1
-  quantityCollected: 1
+  quantityCollected: 2
   collection: {fileID: 0}
   isComplete: 1
   isActive: 0

@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 35f92815b0ce32c4d9607f6e9ba64070, type: 2}
   currentQuests:
   - {fileID: 11400000, guid: e651e0ef7e9767e48b67cd208c885ac6, type: 2}
+  - {fileID: 11400000, guid: 35f92815b0ce32c4d9607f6e9ba64070, type: 2}

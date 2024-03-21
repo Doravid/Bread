@@ -7,9 +7,11 @@ public class LevelWarp : MonoBehaviour
 {
     public string sceneName;
     public string sceneStartLocation;
+    private SaveData saveData;
     private void Start()
     {
-        if(sceneName == null)
+        saveData = GameObject.FindGameObjectWithTag("SaveManager").GetComponent<SaveData>();
+        if (sceneName == null)
         {
             sceneName = SceneManager.GetActiveScene().name; 
         }
@@ -19,6 +21,8 @@ public class LevelWarp : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            saveData.changeSceneName(sceneName);
+            saveData.SaveIntoJson();
             other.GetComponent<CharacterStats>().warpPoint = sceneStartLocation;
             Save.saveStats(other.GetComponent<CharacterStats>());
             SceneManager.LoadScene(sceneName);

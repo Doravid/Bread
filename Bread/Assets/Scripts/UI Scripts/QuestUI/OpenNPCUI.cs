@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class OpenNPCUI : MonoBehaviour
 {
-    private bool playerInSightRange;
-    public LayerMask whatIsPlayer;
+    private bool shouldPrompt;
     public GameObject buttonPromt;
     public QuestManager manager;
 
@@ -13,24 +12,27 @@ public class OpenNPCUI : MonoBehaviour
     void Start()
     {        
         buttonPromt.SetActive(false);
-        whatIsPlayer = LayerMask.GetMask("WhatIsPlayer");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        playerInSightRange = Physics.CheckSphere(transform.position, 5f, whatIsPlayer);
-        if (playerInSightRange)
+        if(other.tag == "Player")
         {
             buttonPromt.SetActive(!manager.isInUI());
+            shouldPrompt = true;
         }
-        else {
-
-            Cursor.visible = false;
-        }
-        if (Input.GetKeyDown(KeyCode.E) && playerInSightRange){
+    }
+    private void Update()
+    {
+        if (shouldPrompt && Input.GetKeyDown(KeyCode.E))
+        {
             manager.toggleMenu();
-            
+            buttonPromt.SetActive(false);
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        buttonPromt.SetActive(false);
+        shouldPrompt=false;
     }
 }

@@ -1,21 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Save : MonoBehaviour
 {
-    [SerializeField]
-    private Transform player;
-    private void Start()
+
+    private void Awake()
     {
-        
+        transform.position = new Vector3(PlayerPrefs.GetFloat("PPX"), PlayerPrefs.GetFloat("PPY"), PlayerPrefs.GetFloat("PPZ"));
     }
     void Update()
     {
-        PlayerPrefs.SetFloat("PPX", player.position.x);
-        PlayerPrefs.SetFloat("PPY", player.position.y);
-        PlayerPrefs.SetFloat("PPZ", player.position.z);
+        PlayerPrefs.SetFloat("PPX", transform.position.x);
+        PlayerPrefs.SetFloat("PPY", transform.position.y);
+        PlayerPrefs.SetFloat("PPZ", transform.position.z);
     }
     public static void saveStats(CharacterStats stats)
     {
@@ -46,6 +46,8 @@ public class Save : MonoBehaviour
         stats.setHealthRegen(PlayerPrefs.GetInt("HEALTHREGEN", stats.getHealthRegen()));
         stats.setManaRegen(PlayerPrefs.GetInt("MANAREGEN", stats.getManaRegen()));
         stats.warpPoint = PlayerPrefs.GetString("WARPTO", "");
+
+        
     }
     public static void saveObejcts()
     {

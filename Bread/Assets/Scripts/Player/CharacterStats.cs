@@ -42,6 +42,7 @@ public class CharacterStats : MonoBehaviour
     {
         if (warpPoint != null && warpPoint != "" && GameObject.Find(warpPoint) != null)
         {
+            Debug.Log("Warping");
             transform.position = GameObject.Find(warpPoint).transform.position;
             warpPoint = "";
         }
@@ -202,10 +203,22 @@ public class CharacterStats : MonoBehaviour
         incrementItemQuest(item);
         playerInventory.addItem(item);
     }
+    public void incrementQuestName(string name)
+    {
+        foreach (Quest quest in playerQuests.currentQuests)
+        {
+            
+            if (quest.questName == name)
+            {
+                quest.quantityCollected++;
+            }
+        }
+    }
     private void incrementEnemyQuest(GameObject obj)
     {
         foreach (Quest quest in playerQuests.currentQuests)
         {
+            if (quest.collection.GetComponent<BasicEnemyAI>() == null) continue;
             if (obj.GetComponent<BasicEnemyAI>().enemyName == quest.collection.GetComponent<BasicEnemyAI>().enemyName && !quest.isComplete)
             {
                 quest.quantityCollected++;
@@ -216,7 +229,7 @@ public class CharacterStats : MonoBehaviour
     {
         foreach (Quest quest in playerQuests.currentQuests)
         {
-            //if (quest.GetComponent<ICollectable>() == null) return;
+            if (quest.collection.GetComponent<ICollectable>() == null) continue;
             if (item.itemName == quest.collection.GetComponent<ICollectable>().item.itemName && !quest.isComplete)
             {
                 quest.quantityCollected++;
