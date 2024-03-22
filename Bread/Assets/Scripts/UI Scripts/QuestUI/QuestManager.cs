@@ -47,7 +47,11 @@ public class QuestManager : MonoBehaviour
         GameObject right = panelUI.transform.GetChild(1).gameObject;
         for(int i = 0; i < right.transform.childCount; i++)
         {
-            right.transform.GetChild(i).GetComponent<TurnInManager>().refreshQuests();
+            if(right.transform.GetChild(i).GetComponent<TurnInManager>() != null)
+            {
+                right.transform.GetChild(i).GetComponent<TurnInManager>().refreshQuests();
+            }
+            
         }
         if (!inUI)
         {

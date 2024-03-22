@@ -229,7 +229,7 @@ public class CharacterStats : MonoBehaviour
     {
         foreach (Quest quest in playerQuests.currentQuests)
         {
-            if (quest.collection.GetComponent<ICollectable>() == null) continue;
+            if (quest.collection == null  || quest.collection.GetComponent<ICollectable>() == null) continue;
             if (item.itemName == quest.collection.GetComponent<ICollectable>().item.itemName && !quest.isComplete)
             {
                 quest.quantityCollected++;
