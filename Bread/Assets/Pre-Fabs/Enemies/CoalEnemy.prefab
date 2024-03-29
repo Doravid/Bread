@@ -141,6 +141,7 @@ MonoBehaviour:
   enemyName: Coal
   xpValue: 5
   manager: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: 68bc48f12587b6b4b97c9523a46f593e, type: 2}
 --- !u!65 &8520846444634486314
 BoxCollider:
   m_ObjectHideFlags: 0

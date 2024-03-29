@@ -19,11 +19,10 @@ public class SaveData : MonoBehaviour
         }
         else { Destroy(gameObject); }
         LoadFromJason();
-        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName(_SceneData.sceneName))
+        if (!SceneManager.GetActiveScene().name.Equals("MainMenu"))
         {
-            SceneManager.LoadScene(_SceneData.sceneName);
+            loadCorrectScene();
         }
-        
         foreach (toggleableObject obj in _SceneData.objs)
         {
         if(GameObject.Find(obj.name) == null)
@@ -79,6 +78,18 @@ public class SaveData : MonoBehaviour
     {
         SaveIntoJson();
     }
+    public void loadCorrectScene()
+    {
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName(_SceneData.sceneName))
+        {
+            SceneManager.LoadScene(_SceneData.sceneName);
+        }
+    }
+    public void quitGame()
+    {
+        SaveIntoJson();
+        Application.Quit();
+    }
 }
 
 [System.Serializable]
@@ -95,5 +106,3 @@ public class toggleableObject
     public string name;
     public bool enabled;
 }
-
-

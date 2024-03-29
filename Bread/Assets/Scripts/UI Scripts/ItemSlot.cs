@@ -9,6 +9,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     [SerializeField] Inventory playerInventory;
     [SerializeField] GameObject itemPrefab;
     [SerializeField] Image sprite;
+    [SerializeField] SpawnTopping spawnTopping;
     [SerializeField] private InventoryManager inventoryManager;
     private CharacterStats characterStats;
     private void Awake()
@@ -28,14 +29,15 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 case "Crust":
                     if (droppedItem.GetComponent<ItemInit>().item.equipmentType != "Crust") return;
                     unEquipItem("Crust");
-                    playerInventory.Crust = eventData.pointerDrag.GetComponent<ItemInit>().item;
+                    playerInventory.Crust = droppedItem.GetComponent<ItemInit>().item;
                     cleanUp(droppedItem);
                     break; 
 
                 case "Seasoning1":
                     if (droppedItem.GetComponent<ItemInit>().item.equipmentType != "Seasoning") return;
                     unEquipItem("Seasoning1");
-                    playerInventory.Seasoning1 = eventData.pointerDrag.GetComponent<ItemInit>().item;
+                    playerInventory.Seasoning1 = droppedItem.GetComponent<ItemInit>().item;
+                    spawnTopping.updateEquipment();
                     cleanUp(droppedItem);
                     
                     break;
@@ -43,14 +45,15 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 case "Seasoning2":
                     if (droppedItem.GetComponent<ItemInit>().item.equipmentType != "Seasoning") return;
                     unEquipItem("Seasoning2");
-                    playerInventory.Seasoning2 = eventData.pointerDrag.GetComponent<ItemInit>().item;
+                    playerInventory.Seasoning2 = droppedItem.GetComponent<ItemInit>().item;
+                    spawnTopping.updateEquipment();
                     cleanUp(droppedItem);
                     
                     break;
                 case "Coating":
                     if (droppedItem.GetComponent<ItemInit>().item.equipmentType != "Coating") return;
                     unEquipItem("Coating");
-                    playerInventory.Coating = eventData.pointerDrag.GetComponent<ItemInit>().item;
+                    playerInventory.Coating = droppedItem.GetComponent<ItemInit>().item;
                     cleanUp(droppedItem);
                     
                     break;
@@ -63,12 +66,13 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     }
     private void cleanUp(GameObject droppedItem)
     {
-        playerInventory.inventory.Remove(droppedItem.GetComponent<ItemInit>().item);
+        inventoryManager.removeItem(droppedItem.GetComponent<ItemInit>().item, 1);
         sprite.gameObject.SetActive(true);
         sprite.sprite = droppedItem.GetComponent<ItemInit>().item.itemImage;
         characterStats.loadBuff(droppedItem.GetComponent<ItemInit>().item.buff);
         Destroy(droppedItem);
         GameObject.FindGameObjectWithTag("Player").GetComponent<HUDStatsManager>().updateStats();
+        
     }
     public void unEquipItem(string slot)
     {
@@ -87,11 +91,13 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 inventoryManager.addItem(playerInventory.Seasoning1);
                 characterStats.removeBuff(playerInventory.Seasoning1.buff);
                 playerInventory.Seasoning1 = null;
+                spawnTopping.deleteSeasoning1();
                 break;
             case "Seasoning2":
                 if (playerInventory.Seasoning2 == null) return;
                 inventoryManager.addItem(playerInventory.Seasoning2);
                 characterStats.removeBuff(playerInventory.Seasoning2.buff);
+                spawnTopping.deleteSeasoning2();
                 playerInventory.Seasoning2 = null;
                 break;         
             case "Coating":

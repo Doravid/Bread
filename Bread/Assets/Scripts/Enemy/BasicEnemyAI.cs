@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -30,6 +31,7 @@ public class BasicEnemyAI : MonoBehaviour
     public string enemyName;
     public int xpValue;
     public QuestManager manager;
+    public LootTable lootTable;
 
     private void Awake()
     {
@@ -46,8 +48,7 @@ public class BasicEnemyAI : MonoBehaviour
         //Kills self on 0 HP
         if (health <= 0)
         {
-            player.GetComponent<CharacterStats>().enemyKilled(gameObject);
-            Destroy(gameObject);
+            death();
             return;
         }
 
@@ -108,5 +109,28 @@ public class BasicEnemyAI : MonoBehaviour
     {
         alreadyAttacked = false;
     }
+    private void death()
+    {
+        player.GetComponent<CharacterStats>().enemyKilled(gameObject);
+        
+        if(lootTable != null)
+        {
+            for (int i = 0; i < lootTable.drops.Count; i++)
+            {
+                float f = Random.Range(0f, 1f);
+                if (f <= (float) lootTable.dropChance[i])
+                {
+                    dropItem(lootTable.drops[i]);
+                }
+            }
+        }
+        Destroy(gameObject);
+    }
+    public void dropItem(Item item)
+    {
+        GameObject obj = Instantiate(item.itemModel.gameObject, transform.position, transform.rotation);
+        obj.AddComponent<ICollectable>().item = item;
+        obj.AddComponent<BoxCollider>().isTrigger = true;
+        
+    }
 }
-

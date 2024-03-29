@@ -12,6 +12,7 @@ public class ICollectable : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        saveData = GameObject.FindGameObjectWithTag("SaveManager").GetComponent<SaveData>();
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<CharacterStats>().collectItem(item);
