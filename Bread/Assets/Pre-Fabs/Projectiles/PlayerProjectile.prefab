@@ -9749,7 +9749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerProjectile: 1
-  damage: 2
+  damageText: {fileID: 3230850134298323586, guid: ed2e769b1527ee640be30a2153550dda, type: 3}
 --- !u!1 &3405074063714662546
 GameObject:
   m_ObjectHideFlags: 0

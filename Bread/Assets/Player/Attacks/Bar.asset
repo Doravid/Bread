@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd527fc22239894bb524690cacddaf6, type: 3}
   m_Name: Bar
   m_EditorClassIdentifier: 
-  currentAttacks: []
+  currentAttacks:
+  - {fileID: 11400000, guid: 9e762a67ddbe0df4290267b3b738f0d0, type: 2}
+  - {fileID: 11400000, guid: 9e762a67ddbe0df4290267b3b738f0d0, type: 2}
+  - {fileID: 11400000, guid: 9e762a67ddbe0df4290267b3b738f0d0, type: 2}
+  - {fileID: 11400000, guid: 9e762a67ddbe0df4290267b3b738f0d0, type: 2}

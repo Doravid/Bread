@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SelfDestruct : MonoBehaviour
@@ -8,6 +9,7 @@ public class SelfDestruct : MonoBehaviour
     private bool isPlayerProjectile;
     private int damage;
     private GameObject player;
+    [SerializeField] GameObject damageText;
     // Start is called before the first frame update
      void Start()
     {
@@ -28,6 +30,14 @@ public class SelfDestruct : MonoBehaviour
         {
             if(other.tag == "Enemy")
             {
+                GameObject text = Instantiate(damageText);
+                text.transform.position = other.transform.position;
+                Quaternion _lookRotation = Quaternion.LookRotation((other.transform.position - player.transform.position).normalized);
+                text.transform.rotation = _lookRotation;
+
+                text.GetComponent<TextMeshPro>().text = damage.ToString();
+                text.GetComponent<Rigidbody>().AddForce(transform.up * 7f, ForceMode.Impulse);
+                text.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.Impulse);
                 other.GetComponent<BasicEnemyAI>().health -= damage;
                 Destroy(gameObject);
             }

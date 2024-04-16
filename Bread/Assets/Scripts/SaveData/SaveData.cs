@@ -37,7 +37,6 @@ public class SaveData : MonoBehaviour
     {
         string sceneData = JsonUtility.ToJson(_SceneData);
         System.IO.File.WriteAllText(Application.persistentDataPath + "/ObjectData.json", sceneData);
-        Debug.Log(Application.persistentDataPath);
     }
     public void LoadFromJason()
     {
