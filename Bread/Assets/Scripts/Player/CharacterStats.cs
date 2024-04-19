@@ -172,7 +172,6 @@ public class CharacterStats : MonoBehaviour
     }
     public void loadBuff(PlayerBuff buff)
     {
-        Debug.Log(buff.Strength);
             if (buff.alreadyApplied) return;
         //ADDS UNAPPLIED BUFFS to: XP, Strength, MaxMana, and MaxHealth.
         xp += buff.XP;

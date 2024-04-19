@@ -9,6 +9,8 @@ public class Attack : ScriptableObject
     public int manaCost, damageAmount;
     public Sprite attackSprite;
     public string attackName;
-    public GameObject attackProjectile;
+    public GameObject model;
+    public bool isMelee, timerDone;
+    public float timeBetweenAttacks;
 }
 

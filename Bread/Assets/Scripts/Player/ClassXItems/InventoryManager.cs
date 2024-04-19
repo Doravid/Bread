@@ -86,7 +86,8 @@ public class InventoryManager : MonoBehaviour
     }
     public void removeItem(Item item, int amount)
     {
-        if(amount >= item.quantity)
+        
+        if (amount >= item.quantity)
         {
             item.quantity = 0;
             removeItem(item);
@@ -95,15 +96,21 @@ public class InventoryManager : MonoBehaviour
         item.quantity -= amount;
         int amountLeft = amount;
         int numItems = transform.childCount;
+        Debug.Log(numItems);
         for (int i = numItems-1; i >= 0; i--)
         {
-            if (!transform.GetChild(i).GetComponent<ItemInit>().item.itemName.Equals(item.itemName)) continue;
-            if (int.Parse(transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text) < amountLeft)
+            Debug.Log(transform.GetChild(i).GetComponent<ItemInit>().item.itemName.Equals(item.itemName) + " | " 
+                + transform.GetChild(i).GetComponent<ItemInit>().item.itemName + " | " + item.itemName);
+            if (!transform.GetChild(i).GetComponent<ItemInit>().item.itemName.Equals(item.itemName)) continue; //Checks for correct Item
+            Debug.Log("Amount left: ");
+            if (int.Parse(transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text) <= amountLeft)
             {
+                Debug.Log("Amount left: " + (int.Parse(transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text) - amountLeft));
                 Destroy(transform.GetChild(i).gameObject);
                 amountLeft -= int.Parse(transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text);
             }
             else {
+                Debug.Log("Amount left: " + (int.Parse(transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text) - amountLeft));
                 transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text =
                     (int.Parse(transform.GetChild(i).GetComponent<ItemInit>().itemQuantity.text) -amountLeft).ToString();
                 break;
@@ -113,7 +120,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void addItem(Item item)
     {
-        Debug.Log("Add Item: " + item.name);
+
         int quantity = item.quantity;
 
         if (item.quantity == 0)
@@ -150,5 +157,10 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+    }
+    public void addTempItem(GameObject obj)
+    {
+        GameObject tempItem = Instantiate(itemPrefabTemplate, transform, false);
+        tempItem.GetComponent<ItemInit>().spawnItem(obj.GetComponent<ItemInit>().item);
     }
 }

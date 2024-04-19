@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SelectorScroll : MonoBehaviour
 {
-    int currentSelector = 0;
+    public int currentSelector = 0;
     int counter = 0;
     private void Update()
     {

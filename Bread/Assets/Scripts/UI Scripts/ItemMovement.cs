@@ -9,7 +9,7 @@ public class ItemMovement : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-    private Transform parent;
+    public Transform parent;
     private Canvas canvas;
    private void Awake()
     {
@@ -23,7 +23,6 @@ public class ItemMovement : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.6f;
-        Debug.Log("On Begin Drag");
         gameObject.transform.SetParent(canvas.transform, false);
         rectTransform.position= Input.mousePosition;
         
@@ -31,13 +30,11 @@ public class ItemMovement : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("On Drag");
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("On End Drag");
         transform.SetParent(parent, false);
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;

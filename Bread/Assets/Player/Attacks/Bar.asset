@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAttacks:
   - {fileID: 11400000, guid: 9e762a67ddbe0df4290267b3b738f0d0, type: 2}
-  - {fileID: 11400000, guid: 9e762a67ddbe0df4290267b3b738f0d0, type: 2}
-  - {fileID: 11400000, guid: 9e762a67ddbe0df4290267b3b738f0d0, type: 2}
-  - {fileID: 11400000, guid: 9e762a67ddbe0df4290267b3b738f0d0, type: 2}
+  - {fileID: 11400000, guid: 5ec854dbd33f28c42b6f4d80d315fcdd, type: 2}
+  - {fileID: 11400000, guid: 25f73f57ab9837544974c44af470b816, type: 2}
+  - {fileID: 11400000, guid: 25f73f57ab9837544974c44af470b816, type: 2}

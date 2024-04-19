@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083270fe9d0a5c5488b637e0548d5285, type: 3}
   m_Name: Butter
   m_EditorClassIdentifier: 
-  quantity: 10
+  quantity: 2
   maxStack: 1
   sellValue: 0
   itemModel: {fileID: 919132149155446097, guid: 60ce31bb24d99454fa760951c213f679, type: 3}

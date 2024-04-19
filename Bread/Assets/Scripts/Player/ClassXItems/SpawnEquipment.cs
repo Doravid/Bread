@@ -13,18 +13,17 @@ public class SpawnTopping : MonoBehaviour
 
     public void updateEquipment()
     {
-        if (inventory.Seasoning1.itemModel != null)
+        if (inventory.Seasoning1 != null && inventory.Seasoning1.itemModel != null)
         {
             gameObjects[0] = (Instantiate(inventory.Seasoning1.itemModel, transform));
         }
-        else if (inventory.Seasoning2.itemModel != null)
+        else if (inventory.Seasoning2 != null)
         {
             gameObjects[1] = (Instantiate(inventory.Seasoning2.itemModel, transform));
         }
     }
     public void deleteSeasoning1()
     {
-        Debug.Log("Del S 1");
         Destroy(gameObjects[0]);
         gameObjects[0] = null;
     }
