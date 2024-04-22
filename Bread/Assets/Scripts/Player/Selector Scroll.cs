@@ -11,21 +11,36 @@ public class SelectorScroll : MonoBehaviour
     {
         if(Input.mouseScrollDelta.y > 0)
         {
-            counter++;
+            scrollUp();
         }
         if (Input.mouseScrollDelta.y < 0)
         {
-            counter--;
-        }
-        if(counter > 2)
-        {
-            scrollUp();
-            counter = 0;
-        }
-        if(counter < -2)
-        {
             scrollDown();
-            counter = 0;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            transform.GetChild(currentSelector).gameObject.GetComponent<Image>().enabled = false;
+            currentSelector = 0;
+            transform.GetChild(currentSelector).gameObject.GetComponent<Image>().enabled = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            transform.GetChild(currentSelector).gameObject.GetComponent<Image>().enabled = false;
+            currentSelector = 1;
+            transform.GetChild(currentSelector).gameObject.GetComponent<Image>().enabled = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            transform.GetChild(currentSelector).gameObject.GetComponent<Image>().enabled = false;
+            currentSelector = 2;
+            transform.GetChild(currentSelector).gameObject.GetComponent<Image>().enabled = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            transform.GetChild(currentSelector).gameObject.GetComponent<Image>().enabled = false;
+            currentSelector = 3;
+            transform.GetChild(currentSelector).gameObject.GetComponent<Image>().enabled = true;
         }
     }
 

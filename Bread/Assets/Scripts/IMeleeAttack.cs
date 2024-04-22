@@ -7,7 +7,7 @@ public class IMeleeAttack : MonoBehaviour
 {
     private GameObject player;
     [SerializeField] GameObject damageText;
-    private int damage;
+    public int damage;
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");

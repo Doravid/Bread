@@ -16,6 +16,7 @@ public class AttackBarInit : MonoBehaviour
         }
     for(int i = 0; i < attackBar.currentAttacks.Count; i++)
         {
+            if(attackBar.currentAttacks[i].attackName.Equals("Null")) { continue; }
             transform.GetChild(i).GetComponent<Image>().enabled = true;
             transform.GetChild(i).GetComponent<Image>().sprite = attackBar.currentAttacks[i].attackSprite;
         }

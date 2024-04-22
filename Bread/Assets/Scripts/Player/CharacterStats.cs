@@ -172,24 +172,20 @@ public class CharacterStats : MonoBehaviour
     }
     public void loadBuff(PlayerBuff buff)
     {
-            if (buff.alreadyApplied) return;
         //ADDS UNAPPLIED BUFFS to: XP, Strength, MaxMana, and MaxHealth.
         xp += buff.XP;
         strength += buff.Strength;
         maxMana += buff.MaxMana;
         maxHealth += buff.MaxHealth;
-        buff.alreadyApplied = true;
     }
 
     public void removeBuff(PlayerBuff buff)
     {
-        if (!buff.alreadyApplied) Debug.LogError(buff.name + " has already been removed!");
         if (buff.XP != 0) Debug.LogError(buff.name + " should not be removed, it is a permanant buff! (xp != 0)");
         //ADDS UNAPPLIED BUFFS to: XP, Strength, MaxMana, and MaxHealth.
         strength -= buff.Strength;
         maxMana -= buff.MaxMana;
         maxHealth -= buff.MaxHealth;
-        buff.alreadyApplied = false;
     }
     public void enemyKilled(GameObject obj)
     {

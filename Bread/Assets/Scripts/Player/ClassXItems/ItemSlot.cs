@@ -101,8 +101,9 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 if (playerInventory.Seasoning2 == null) return;
                 inventoryManager.addItem(playerInventory.Seasoning2);
                 characterStats.removeBuff(playerInventory.Seasoning2.buff);
-                spawnTopping.deleteSeasoning2();
                 playerInventory.Seasoning2 = null;
+                spawnTopping.deleteSeasoning2();
+                
                 break;         
             case "Coating":
                 if (playerInventory.Coating == null) return;

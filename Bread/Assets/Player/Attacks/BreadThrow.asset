@@ -16,7 +16,7 @@ MonoBehaviour:
   damageAmount: 10
   attackSprite: {fileID: 21300000, guid: cdd3802b2839b31409430e4f03c49fe4, type: 3}
   attackName: BreadThrow
-  model: {fileID: 0}
+  model: {fileID: 1645536045341741610, guid: 71151961daae20240adfa034b1af4a5e, type: 3}
   isMelee: 0
-  timerDone: 0
   timeBetweenAttacks: 2
+  currentTimer: 0.8159838

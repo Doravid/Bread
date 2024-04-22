@@ -10,7 +10,8 @@ public class Attack : ScriptableObject
     public Sprite attackSprite;
     public string attackName;
     public GameObject model;
-    public bool isMelee, timerDone;
+    public bool isMelee;
     public float timeBetweenAttacks;
+    public float currentTimer;
 }
 

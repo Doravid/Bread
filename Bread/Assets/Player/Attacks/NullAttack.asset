@@ -15,8 +15,8 @@ MonoBehaviour:
   manaCost: 0
   damageAmount: 0
   attackSprite: {fileID: 0}
-  attackName: BreadThrow
+  attackName: Null
   model: {fileID: 0}
   isMelee: 0
-  timerDone: 0
   timeBetweenAttacks: 0
+  currentTimer: 0

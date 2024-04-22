@@ -7,7 +7,7 @@ public class IProjectile : MonoBehaviour
 {
     [SerializeField]
     private bool isPlayerProjectile;
-    private int damage;
+    public int damage;
     private GameObject player;
     [SerializeField] GameObject damageText;
      void Start()

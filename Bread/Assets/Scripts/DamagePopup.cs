@@ -11,10 +11,6 @@ public class DamagePopup : MonoBehaviour
         StartCoroutine(SelfDestructa());
 
     }
-    private void Update()
-    {
-        this.GetComponent<TextMeshPro>().text = "";
-    }
 
     IEnumerator SelfDestructa()
     {

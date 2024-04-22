@@ -5,7 +5,8 @@ using UnityEngine;
 public class SpawnTopping : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
-    private GameObject[] gameObjects = new GameObject[2];
+    private GameObject obj;
+    private bool objEx = false;
     private void Start()
     {
         updateEquipment();
@@ -13,25 +14,29 @@ public class SpawnTopping : MonoBehaviour
 
     public void updateEquipment()
     {
-        if (inventory.Seasoning1 != null && inventory.Seasoning1.itemModel != null)
+        bool sea1Exists = inventory.Seasoning1 != null;
+        bool sea2Exists = inventory.Seasoning2 != null;
+        if (sea1Exists && !objEx)
         {
-            gameObjects[0] = (Instantiate(inventory.Seasoning1.itemModel, transform));
+            obj = Instantiate(inventory.Seasoning1.itemModel, transform);
+            objEx = true;
         }
-        else if (inventory.Seasoning2 != null)
+        else if (sea2Exists && !objEx)
         {
-            gameObjects[1] = (Instantiate(inventory.Seasoning2.itemModel, transform));
+           Instantiate(inventory.Seasoning2.itemModel, transform);
+            objEx = true;
         }
     }
     public void deleteSeasoning1()
     {
-        Destroy(gameObjects[0]);
-        gameObjects[0] = null;
+        Destroy(transform.GetChild(0).gameObject);
+        objEx = false;
+        updateEquipment();
     }
+    //Deprecated but I'm too lazy to rewire everything
     public void deleteSeasoning2()
     {
-        Destroy(gameObjects[1]);
-        gameObjects[0] = null;
+        deleteSeasoning1();
     }
-
 
 }
