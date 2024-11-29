@@ -79,8 +79,13 @@ public class SaveData : MonoBehaviour
     }
     public void loadCorrectScene()
     {
+        if(_SceneData.sceneName == null || _SceneData.sceneName.Length == 0)
+        {
+            _SceneData.sceneName = "TutorialZone";
+        }
         if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName(_SceneData.sceneName))
         {
+            Debug.Log(_SceneData.sceneName);
             SceneManager.LoadScene(_SceneData.sceneName);
         }
     }

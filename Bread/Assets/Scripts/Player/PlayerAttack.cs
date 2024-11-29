@@ -19,8 +19,10 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0) return;
         if (Input.GetMouseButton((int)MouseButton.Left) && !attackBar.currentAttacks[scroll.currentSelector].attackName.Equals("Null"))
         {
+            //Does a melee attack if the current attack is a melee attack, otherwise do a ranged attack. 
             if (attackBar.currentAttacks[scroll.currentSelector].isMelee)
             {
                 meleeAttack();
@@ -41,11 +43,11 @@ public class PlayerAttack : MonoBehaviour
     }
     private void meleeAttack() {
         if (attackBar.currentAttacks[scroll.currentSelector].currentTimer > 0) return;
-
+        //Adds the cooldown for using the attack to the cooldown timer.
         attackBar.currentAttacks[scroll.currentSelector].currentTimer += attackBar.currentAttacks[scroll.currentSelector].timeBetweenAttacks;
-        stats.setCurrentMana(stats.getCurrentMana() - 5);
-        Rigidbody rb = Instantiate(attackBar.currentAttacks[scroll.currentSelector].model, transform.position, transform.rotation, transform).GetComponent<Rigidbody>();
-        rb.gameObject.GetComponent<IMeleeAttack>().damage += attackBar.currentAttacks[scroll.currentSelector].damageAmount;
+        //Creates the weapon from the slot and adds the weapons damage to the weapon gameobject,
+        //Get the <IMeleeAttack>component from the child because the parrent is a rotation point.
+        Instantiate(attackBar.currentAttacks[scroll.currentSelector].model, transform.position, transform.rotation, transform).GetComponentInChildren<IMeleeAttack>().damage += attackBar.currentAttacks[scroll.currentSelector].damageAmount;
     }
     private void rangedAttack()
     {

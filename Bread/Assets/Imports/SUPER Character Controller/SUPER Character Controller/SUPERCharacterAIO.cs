@@ -150,7 +150,7 @@ public class SUPERCharacterAIO : MonoBehaviour{
     Vector2 MovInput_Smoothed;
     Vector2 _2DVelocity;
     float _2DVelocityMag, speedToVelocityRatio;
-    PhysicMaterial _ZeroFriction, _MaxFriction;
+    PhysicsMaterial _ZeroFriction, _MaxFriction;
     CapsuleCollider capsule;
     Rigidbody p_Rigidbody;
     bool crouchInput_Momentary, crouchInput_FrameOf, sprintInput_FrameOf,sprintInput_Momentary, slideInput_FrameOf, slideInput_Momentary;
@@ -398,16 +398,16 @@ public class SUPERCharacterAIO : MonoBehaviour{
         capsule = GetComponent<CapsuleCollider>();
         standingHeight = capsule.height;
         currentGroundSpeed = walkingSpeed;
-        _ZeroFriction = new PhysicMaterial("Zero_Friction");
+        _ZeroFriction = new PhysicsMaterial("Zero_Friction");
         _ZeroFriction.dynamicFriction =0f;
         _ZeroFriction.staticFriction =0;
-        _ZeroFriction.frictionCombine = PhysicMaterialCombine.Minimum;
-        _ZeroFriction.bounceCombine = PhysicMaterialCombine.Minimum;
-        _MaxFriction = new PhysicMaterial("Max_Friction");
+        _ZeroFriction.frictionCombine = PhysicsMaterialCombine.Minimum;
+        _ZeroFriction.bounceCombine = PhysicsMaterialCombine.Minimum;
+        _MaxFriction = new PhysicsMaterial("Max_Friction");
         _MaxFriction.dynamicFriction =1;
         _MaxFriction.staticFriction =1;
-        _MaxFriction.frictionCombine = PhysicMaterialCombine.Maximum;
-        _MaxFriction.bounceCombine = PhysicMaterialCombine.Average;
+        _MaxFriction.frictionCombine = PhysicsMaterialCombine.Maximum;
+        _MaxFriction.bounceCombine = PhysicsMaterialCombine.Average;
         #endregion
 
         #region Stamina System
@@ -840,7 +840,7 @@ public class SUPERCharacterAIO : MonoBehaviour{
             transform.rotation = (Quaternion.Euler(0,Mathf.MoveTowardsAngle(p_Rigidbody.rotation.eulerAngles.y,(Mathf.Atan2(InputDir.x,InputDir.z)*Mathf.Rad2Deg),10), 0));
             //transform.rotation = Quaternion.Euler(0,Mathf.MoveTowardsAngle(transform.eulerAngles.y,(Mathf.Atan2(InputDir.x,InputDir.z)*Mathf.Rad2Deg),2.5f), 0);
         }else if(isSliding){
-            transform.localRotation = (Quaternion.Euler(Vector3.up*Mathf.MoveTowardsAngle(p_Rigidbody.rotation.eulerAngles.y,(Mathf.Atan2(p_Rigidbody.velocity.x,p_Rigidbody.velocity.z)*Mathf.Rad2Deg),10)));
+            transform.localRotation = (Quaternion.Euler(Vector3.up*Mathf.MoveTowardsAngle(p_Rigidbody.rotation.eulerAngles.y,(Mathf.Atan2(p_Rigidbody.linearVelocity.x,p_Rigidbody.linearVelocity.z)*Mathf.Rad2Deg),10)));
         }else if(!currentGroundInfo.isGettingGroundInfo && rotateCharacterToCameraForward){
             transform.localRotation = (Quaternion.Euler(Vector3.up*Mathf.MoveTowardsAngle(p_Rigidbody.rotation.eulerAngles.y, headRot.y,10)));
         }
@@ -851,7 +851,7 @@ public class SUPERCharacterAIO : MonoBehaviour{
     void MovePlayer(Vector3 Direction, float Speed){
        // GroundInfo gI = GetGroundInfo();
         isIdle = Direction.normalized.magnitude <=0;
-        _2DVelocity = Vector2.right * p_Rigidbody.velocity.x + Vector2.up * p_Rigidbody.velocity.z;
+        _2DVelocity = Vector2.right * p_Rigidbody.linearVelocity.x + Vector2.up * p_Rigidbody.linearVelocity.z;
         speedToVelocityRatio = (Mathf.Lerp(0, 2, Mathf.InverseLerp(0, (sprintingSpeed/50), _2DVelocity.magnitude)));
         _2DVelocityMag = Mathf.Clamp((walkingSpeed/50) / _2DVelocity.magnitude, 0f,2f);
     
@@ -860,29 +860,29 @@ public class SUPERCharacterAIO : MonoBehaviour{
         if((currentGroundInfo.isGettingGroundInfo) && !Jumped && !isSliding && !doingPosInterp)
         {
             //Deceleration
-            if(Direction.magnitude==0&& p_Rigidbody.velocity.normalized.magnitude>0.1f){
-                p_Rigidbody.AddForce(-new Vector3(p_Rigidbody.velocity.x,currentGroundInfo.isInContactWithGround? p_Rigidbody.velocity.y-  Physics.gravity.y:0,p_Rigidbody.velocity.z)*(decelerationSpeed*Time.fixedDeltaTime),ForceMode.Force); 
+            if(Direction.magnitude==0&& p_Rigidbody.linearVelocity.normalized.magnitude>0.1f){
+                p_Rigidbody.AddForce(-new Vector3(p_Rigidbody.linearVelocity.x,currentGroundInfo.isInContactWithGround? p_Rigidbody.linearVelocity.y-  Physics.gravity.y:0,p_Rigidbody.linearVelocity.z)*(decelerationSpeed*Time.fixedDeltaTime),ForceMode.Force); 
             }
             //normal speed
             else if((currentGroundInfo.isGettingGroundInfo) && currentGroundInfo.groundAngle<hardSlopeLimit && currentGroundInfo.groundAngle_Raw<hardSlopeLimit){
-                p_Rigidbody.velocity = (Vector3.MoveTowards(p_Rigidbody.velocity,Vector3.ClampMagnitude(((Direction)*((Speed)*Time.fixedDeltaTime))+(Vector3.down),Speed/50),1));
+                p_Rigidbody.linearVelocity = (Vector3.MoveTowards(p_Rigidbody.linearVelocity,Vector3.ClampMagnitude(((Direction)*((Speed)*Time.fixedDeltaTime))+(Vector3.down),Speed/50),1));
             }
             capsule.sharedMaterial = InputDir.magnitude>0 ? _ZeroFriction : _MaxFriction;
         }
         //Sliding
         else if(isSliding){
-            p_Rigidbody.AddForce(-(p_Rigidbody.velocity-Physics.gravity)*(slidingDeceleration*Time.fixedDeltaTime),ForceMode.Force);
+            p_Rigidbody.AddForce(-(p_Rigidbody.linearVelocity-Physics.gravity)*(slidingDeceleration*Time.fixedDeltaTime),ForceMode.Force);
         }
         
         //Air Control
         else if(!currentGroundInfo.isGettingGroundInfo){
             p_Rigidbody.AddForce((((Direction*(walkingSpeed))*Time.fixedDeltaTime)*airControlFactor*5)*currentGroundInfo.groundAngleMultiplier_Inverse_persistent,ForceMode.Acceleration);
-            p_Rigidbody.velocity= Vector3.ClampMagnitude((Vector3.right*p_Rigidbody.velocity.x + Vector3.forward*p_Rigidbody.velocity.z) ,(walkingSpeed/50))+(Vector3.up*p_Rigidbody.velocity.y);
+            p_Rigidbody.linearVelocity= Vector3.ClampMagnitude((Vector3.right*p_Rigidbody.linearVelocity.x + Vector3.forward*p_Rigidbody.linearVelocity.z) ,(walkingSpeed/50))+(Vector3.up*p_Rigidbody.linearVelocity.y);
             if(!currentGroundInfo.potentialStair && jumpEnhancements){
-                if(p_Rigidbody.velocity.y < 0 && p_Rigidbody.velocity.y> Physics.gravity.y*1.5f){
-                    p_Rigidbody.velocity += Vector3.up*(Physics.gravity.y*(decentMultiplier)*Time.fixedDeltaTime);
-                }else if(p_Rigidbody.velocity.y>0 && !jumpInput_Momentary){
-                   p_Rigidbody.velocity += Vector3.up*(Physics.gravity.y*(tapJumpMultiplier-1)*Time.fixedDeltaTime);
+                if(p_Rigidbody.linearVelocity.y < 0 && p_Rigidbody.linearVelocity.y> Physics.gravity.y*1.5f){
+                    p_Rigidbody.linearVelocity += Vector3.up*(Physics.gravity.y*(decentMultiplier)*Time.fixedDeltaTime);
+                }else if(p_Rigidbody.linearVelocity.y>0 && !jumpInput_Momentary){
+                   p_Rigidbody.linearVelocity += Vector3.up*(Physics.gravity.y*(tapJumpMultiplier-1)*Time.fixedDeltaTime);
                 }
             }
         }
@@ -897,7 +897,7 @@ public class SUPERCharacterAIO : MonoBehaviour{
             (currentStance == Stances.Standing && !Jumped)){
 
                 Jumped = true;
-                p_Rigidbody.velocity =(Vector3.right * p_Rigidbody.velocity.x) + (Vector3.forward * p_Rigidbody.velocity.z);
+                p_Rigidbody.linearVelocity =(Vector3.right * p_Rigidbody.linearVelocity.x) + (Vector3.forward * p_Rigidbody.linearVelocity.z);
                 p_Rigidbody.AddForce(Vector3.up*(Force/10),ForceMode.Impulse);
                 if(enableStaminaSystem && jumpingDepletesStamina){
                     InstantStaminaReduction(s_JumpStaminaDepletion);
@@ -911,7 +911,7 @@ public class SUPERCharacterAIO : MonoBehaviour{
             (Time.time>(jumpBlankingPeriod+0.1f)) &&
             (currentStance == Stances.Standing)){
                 Jumped = true;
-                p_Rigidbody.velocity =(Vector3.right * p_Rigidbody.velocity.x) + (Vector3.forward * p_Rigidbody.velocity.z);
+                p_Rigidbody.linearVelocity =(Vector3.right * p_Rigidbody.linearVelocity.x) + (Vector3.forward * p_Rigidbody.linearVelocity.z);
                 p_Rigidbody.AddForce(Vector3.up*(Force/10),ForceMode.Impulse);
                 if(enableStaminaSystem && jumpingDepletesStamina){
                     InstantStaminaReduction(s_JumpStaminaDepletion);
@@ -935,8 +935,8 @@ public class SUPERCharacterAIO : MonoBehaviour{
         }else if(slideInput_Momentary){
             if(enableMovementDebugging) {print("Continuing Slide.");}
             if(Vector3.Distance(transform.position, cachedPosPreSlide)<maxFlatSlideDistance){p_Rigidbody.AddForce(cachedDirPreSlide*(sprintingSpeed/50),ForceMode.Force);}
-            if(p_Rigidbody.velocity.magnitude>sprintingSpeed/50){p_Rigidbody.velocity= p_Rigidbody.velocity.normalized*(sprintingSpeed/50);}
-            else if(p_Rigidbody.velocity.magnitude<(crouchingSpeed/25)){
+            if(p_Rigidbody.linearVelocity.magnitude>sprintingSpeed/50){p_Rigidbody.linearVelocity= p_Rigidbody.linearVelocity.normalized*(sprintingSpeed/50);}
+            else if(p_Rigidbody.linearVelocity.magnitude<(crouchingSpeed/25)){
                 if(enableMovementDebugging) {print("Slide too slow, ending slide into crouch.");}
                 //capsule.sharedMaterial = _MaxFrix;
                 isSliding = false;
@@ -946,7 +946,7 @@ public class SUPERCharacterAIO : MonoBehaviour{
             }
         }else{
             if(OverheadCheck()){
-                if(p_Rigidbody.velocity.magnitude>(walkingSpeed/50)){
+                if(p_Rigidbody.linearVelocity.magnitude>(walkingSpeed/50)){
                     if(enableMovementDebugging) {print("Key realeased, ending slide into a sprint.");}
                     isSliding = false;
                     StartCoroutine(ApplyStance(stanceTransitionSpeed,Stances.Standing));
@@ -1195,7 +1195,7 @@ public class SUPERCharacterAIO : MonoBehaviour{
             internalEyeHeight = (smoothSpeed > 0 ? Mathf.MoveTowards(internalEyeHeight, targetEyeHeight, stanceTransitionSpeed * Time.fixedDeltaTime) : targetCapsuleHeight);
             
             if(currentStance == Stances.Crouching && currentGroundInfo.isGettingGroundInfo){
-                p_Rigidbody.velocity = p_Rigidbody.velocity+(Vector3.down*2);
+                p_Rigidbody.linearVelocity = p_Rigidbody.linearVelocity+(Vector3.down*2);
                 if(enableMovementDebugging) {print("Applying Stance and applying down force ");}
             }
             yield return new WaitForFixedUpdate();
@@ -1429,7 +1429,7 @@ public class SUPERCharacterAIO : MonoBehaviour{
                     if(!zeroOut){
                         //Setup Thirdperson animation triggers here.
                         if(a_velocity != ""){
-                            _3rdPersonCharacterAnimator.SetFloat(a_velocity, p_Rigidbody.velocity.sqrMagnitude);    
+                            _3rdPersonCharacterAnimator.SetFloat(a_velocity, p_Rigidbody.linearVelocity.sqrMagnitude);    
                         }
                         if(a_2DVelocity != ""){
                             _3rdPersonCharacterAnimator.SetFloat(a_2DVelocity, _2DVelocity.magnitude); 
@@ -1569,7 +1569,7 @@ public class SUPERCharacterAIO : MonoBehaviour{
             }break;
         }
        
-        p_Rigidbody.velocity = Vector3.zero;
+        p_Rigidbody.linearVelocity = Vector3.zero;
         InputDir = Vector2.zero;
         MovInput = Vector2.zero;
         MovInput_Smoothed = Vector2.zero;
@@ -1612,7 +1612,7 @@ public class GroundInfo{
     public string groundTag;
     public Material groundMaterial;
     public TerrainLayer groundLayer;
-    public PhysicMaterial groundPhysicMaterial;
+    public PhysicsMaterial groundPhysicMaterial;
     internal Terrain currentTerrain;
     internal Mesh currentMesh;
     internal RaycastHit groundFromRay, stairCheck_RiserCheck, stairCheck_HeightCheck;
@@ -1624,7 +1624,7 @@ public class GroundInfo{
 public class GroundMaterialProfile{
     public MatProfileType profileTriggerType = MatProfileType.Material;
     public List<Material> _Materials;
-    public List<PhysicMaterial> _physicMaterials;
+    public List<PhysicsMaterial> _physicMaterials;
     public List<TerrainLayer> _Layers;
     public List<AudioClip> footstepClips = new List<AudioClip>();
 }
